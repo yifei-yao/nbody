@@ -5,15 +5,17 @@
 #define BODY_H
 
 #include "Triplet.h"
+#include <string>
 
 class Body {
 public:
-    Body(long double, Triplet, Triplet);
+    Body(long double, Triplet, Triplet, std::string);
 
 private:
     long double GM; //Gravitational parameter (gravitational constant * mass)
     Triplet position;
     Triplet velocity;
+    std::string name;
 };
 
 

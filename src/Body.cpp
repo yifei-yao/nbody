@@ -4,8 +4,10 @@
 
 #include "Body.h"
 
-Body::Body(long double GM, Triplet position, Triplet velocity) : GM(GM),
-                                                                 position(
-                                                                         position),
-                                                                 velocity(
-                                                                         velocity) {}
+#include <utility>
+
+using namespace std;
+
+Body::Body(long double GM, Triplet position, Triplet velocity, string name)
+        : GM(GM), position(position), velocity(velocity),
+          name(std::move(name)) {}
