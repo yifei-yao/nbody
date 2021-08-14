@@ -3,4 +3,4 @@ project(nbody)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(nbody src/main.cpp src/Triplet.cpp src/Triplet.h src/Body.cpp src/Body.h)
+add_executable(nbody src/main.cpp src/Triplet.cpp src/Triplet.h src/Body.cpp src/Body.h src/System.cpp src/System.h)
