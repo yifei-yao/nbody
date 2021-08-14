@@ -9,13 +9,15 @@
 
 class Body {
 public:
-    Body(long double, Triplet, Triplet, std::string);
+    Body(std::string name, long double,
+         long double, long double, long double,
+         long double, long double, long double);
 
 private:
+    std::string name;
     long double GM; //Gravitational parameter (gravitational constant * mass)
     Triplet position;
     Triplet velocity;
-    std::string name;
 };
 
 

@@ -7,9 +7,12 @@
 
 using namespace std;
 
-System::System(long double time, string name) : time(time),
-                                                name(std::move(name)) {}
+System::System(std::string name, long double time) : time(time),
+                                                     name(std::move(name)) {}
 
-void System::AddObject(Body object) {
-    objects.push_back(new Body(std::move(object)));
+void System::AddObject(const std::string &object_name, long double GM,
+                       long double X, long double Y, long double Z,
+                       long double VX, long double VY, long double VZ) {
+    objects.push_back(new Body(object_name, GM, X, Y, Z, VX, VY, VZ));
+
 }

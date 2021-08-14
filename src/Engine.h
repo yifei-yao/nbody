@@ -11,6 +11,13 @@ class Engine {
 public:
     Engine();
 
+    void AddTarget(const std::string & = std::string(), long double = 0);
+
+    bool
+    AddObject(const std::string &, long double,
+              long double, long double, long double,
+              long double, long double, long double);
+
 private:
     System *target;
 };
