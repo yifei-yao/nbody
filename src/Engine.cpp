@@ -42,3 +42,7 @@ bool Engine::Save(const string &path) {
     file.close();
     return true;
 }
+
+Engine::~Engine() {
+    delete target;
+}

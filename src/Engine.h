@@ -11,6 +11,8 @@ class Engine {
 public:
     Engine();
 
+    ~Engine();
+
     void AddTarget(const std::string & = std::string(), long double = 0);
 
     bool
