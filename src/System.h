@@ -10,13 +10,14 @@
 
 class System {
 public:
-    explicit System(long double time);
+    explicit System(long double time, std::string name);
 
     void AddObject(Body);
 
 private:
     long double time;
     std::vector<Body *> objects;
+    std::string name;
 };
 
 

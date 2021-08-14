@@ -3,9 +3,13 @@
 //
 
 #include "System.h"
+#include <utility>
 
-System::System(long double time) : time(time) {}
+using namespace std;
+
+System::System(long double time, string name) : time(time),
+                                                name(std::move(name)) {}
 
 void System::AddObject(Body object) {
-    objects.push_back(new Body(object));
+    objects.push_back(new Body(std::move(object)));
 }
