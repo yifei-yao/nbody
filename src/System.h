@@ -10,7 +10,10 @@
 
 class System {
 public:
+    explicit System(long double time);
+
 private:
+    long double time;
     std::vector<Body *> objects;
 };
 
