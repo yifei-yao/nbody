@@ -43,3 +43,10 @@ string System::Output() const {
     }
     return ss.str();
 }
+
+System::~System() {
+    for (Body *object:objects) {
+        delete object;
+    }
+    objects.clear();
+}

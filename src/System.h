@@ -14,6 +14,8 @@ class System {
 public:
     explicit System(std::string name, long double time);
 
+    ~System();
+
     void
     AddObject(const std::string &object_name, long double,
               long double, long double, long double,
