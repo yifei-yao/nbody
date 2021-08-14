@@ -12,6 +12,8 @@ class System {
 public:
     explicit System(long double time);
 
+    void AddObject(Body);
+
 private:
     long double time;
     std::vector<Body *> objects;
