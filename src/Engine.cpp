@@ -4,6 +4,7 @@
 
 #include "Engine.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -29,5 +30,15 @@ bool Engine::PrintTarget() const {
         return false;
     }
     cout << *target;
+    return true;
+}
+
+bool Engine::Save(const string &path) {
+    if (target == nullptr) { return false; }
+    fstream file;
+    file.open(path, ios::out);
+    if (!file) { return false; }
+    file << target->Output();
+    file.close();
     return true;
 }

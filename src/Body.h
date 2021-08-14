@@ -16,6 +16,8 @@ public:
          long double, long double, long double,
          long double, long double, long double);
 
+    std::string Output() const;
+
 private:
     std::string name;
     long double GM; //Gravitational parameter (gravitational constant * mass)

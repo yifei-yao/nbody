@@ -20,6 +20,8 @@ public:
 
     bool PrintTarget() const;
 
+    bool Save(const std::string &);
+
 private:
     System *target;
 };

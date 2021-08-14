@@ -5,6 +5,7 @@
 #ifndef TRIPLET_H
 #define TRIPLET_H
 
+#include "ostream"
 
 class Triplet {
 public:
@@ -15,6 +16,8 @@ public:
     long double get_y() const;
 
     long double get_z() const;
+
+    std::string Output() const;
 
 private:
     long double x;

@@ -3,7 +3,9 @@
 //
 
 #include "System.h"
+#include "StringTool.h"
 #include <utility>
+#include <sstream>
 
 using namespace std;
 
@@ -23,4 +25,21 @@ std::ostream &operator<<(ostream &os, const System &aSystem) {
         os << "\n" << *object;
     }
     return os;
+}
+
+std::string System::get_name() const {
+    return name;
+}
+
+long double System::get_time() const {
+    return time;
+}
+
+string System::Output() const {
+    stringstream ss;
+    ss << name << " " << string_tool::PreciseOut(time);
+    for (Body *object:objects) {
+        ss << "\n" << object->Output();
+    }
+    return ss.str();
 }

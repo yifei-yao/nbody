@@ -19,6 +19,12 @@ public:
               long double, long double, long double,
               long double, long double, long double);
 
+    std::string get_name() const;
+
+    long double get_time() const;
+
+    std::string Output() const;
+
 private:
     std::string name;
     long double time;
