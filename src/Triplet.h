@@ -3,7 +3,7 @@
 //
 
 #ifndef TRIPLET_H
-#define TRIPLT_H
+#define TRIPLET_H
 
 
 class Triplet {

@@ -2,8 +2,8 @@
 // Created by Yifei Yao on 8/14/21.
 //
 
-#ifndef NBODY_SYSTEM_H
-#define NBODY_SYSTEM_H
+#ifndef SYSTEM_H
+#define SYSTEM_H
 
 #include "Body.h"
 #include "vector"
@@ -18,4 +18,4 @@ private:
 };
 
 
-#endif //NBODY_SYSTEM_H
+#endif //SYSTEM_H

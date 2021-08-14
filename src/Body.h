@@ -1,8 +1,8 @@
 //
 // Created by Yifei Yao on 8/14/21.
 //
-#ifndef NBODY_BODY_H
-#define NBODY_BODY_H
+#ifndef BODY_H
+#define BODY_H
 
 #include "Triplet.h"
 
@@ -17,4 +17,4 @@ private:
 };
 
 
-#endif //NBODY_BODY_H
+#endif //BODY_H
