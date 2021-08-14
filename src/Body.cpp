@@ -15,3 +15,14 @@ Body::Body(std::string name, long double GM,
         GM(GM),
         position(X, Y, Z),
         velocity(VX, VY, VZ) {}
+
+std::ostream &operator<<(ostream &os, const Body &object) {
+    os << object.name << " GM = " << object.GM;
+    os << " X = " << object.position.get_x();
+    os << " Y = " << object.position.get_y();
+    os << " Z = " << object.position.get_z();
+    os << " VX = " << object.position.get_x();
+    os << " VY = " << object.position.get_x();
+    os << " VZ = " << object.position.get_x();
+    return os;
+}

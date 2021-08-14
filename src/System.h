@@ -6,9 +6,11 @@
 #define SYSTEM_H
 
 #include "Body.h"
-#include "vector"
+#include <vector>
 
 class System {
+    friend std::ostream &operator<<(std::ostream &, const System &);
+
 public:
     explicit System(std::string name, long double time);
 

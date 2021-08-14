@@ -16,3 +16,11 @@ void System::AddObject(const std::string &object_name, long double GM,
     objects.push_back(new Body(object_name, GM, X, Y, Z, VX, VY, VZ));
 
 }
+
+std::ostream &operator<<(ostream &os, const System &aSystem) {
+    os << aSystem.name << " T = " << aSystem.time;
+    for (Body *object:aSystem.objects) {
+        os << "\n" << *object;
+    }
+    return os;
+}

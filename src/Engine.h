@@ -18,6 +18,8 @@ public:
               long double, long double, long double,
               long double, long double, long double);
 
+    bool PrintTarget() const;
+
 private:
     System *target;
 };

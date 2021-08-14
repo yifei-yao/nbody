@@ -3,7 +3,7 @@
 //
 
 #include "Engine.h"
-#include "iostream"
+#include <iostream>
 
 using namespace std;
 
@@ -20,5 +20,14 @@ Engine::AddObject(const string &name, long double GM,
                   long double VX, long double VY, long double VZ) {
     if (target == nullptr) { return false; }
     target->AddObject(name, GM, X, Y, Z, VX, VY, VZ);
+    return true;
+}
+
+bool Engine::PrintTarget() const {
+    if (target == nullptr) {
+        cout << "Target is empty!\n";
+        return false;
+    }
+    cout << *target;
     return true;
 }
