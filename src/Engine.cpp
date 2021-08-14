@@ -29,7 +29,7 @@ bool Engine::PrintTarget() const {
         cout << "Target is empty!\n";
         return false;
     }
-    cout << *target;
+    cout << *target << "\n";
     return true;
 }
 
@@ -45,4 +45,27 @@ bool Engine::Save(const string &path) {
 
 Engine::~Engine() {
     delete target;
+}
+
+bool Engine::Load(const string &path) {
+    fstream file;
+    file.open(path, ios::in);
+    if (!file) { return false; }
+    string name;
+    long double time;
+    if (file >> name >> time) {
+        delete target;
+        target = new System(name, time);
+        string object_name;
+        long double GM;
+        long double X, Y, Z, VX, VY, VZ;
+        while (file >> object_name >> GM >> X >> Y >> Z >> VX >> VY >> VZ) {
+            AddObject(object_name, GM, X, Y, Z, VX, VY, VZ);
+        }
+        file.close();
+        return true;
+    } else {
+        file.close();
+        return false;
+    }
 }

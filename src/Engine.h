@@ -24,6 +24,8 @@ public:
 
     bool Save(const std::string &);
 
+    bool Load(const std::string &);
+
 private:
     System *target;
 };
