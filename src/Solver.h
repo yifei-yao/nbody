@@ -34,7 +34,6 @@ public:
     void Update(long double) override;
 };
 
-void StepScheduler(FixedStepSolver &, long double end,
-                   long double time_limit);
+void StepScheduler(FixedStepSolver &, long double end, long double time_limit);
 
 #endif //SOLVER_H

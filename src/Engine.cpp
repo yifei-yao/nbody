@@ -71,17 +71,14 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
                  const string &log_path, bool verbose) {
     if (target == nullptr) { return false; }
     if (end <= target->get_time()) { return false; }
-
     if (method == "Euler") {
         Euler solver(target);
         StepScheduler(solver, end, time_limit);
     }
-
     if (method == "EulerImproved") {
         EulerImproved solver(target);
         StepScheduler(solver, end, time_limit);
     }
-
-//    cout << *target;
+    cout << *target << "\n";
     return true;
 }

@@ -61,10 +61,6 @@ void StepScheduler(FixedStepSolver &solver, long double end,
     --total_check_num;
     size_t exe_num = 0;
     auto timestamp = chrono::steady_clock::now();
-
-    // For benchmarking only
-    size_t global_exe_num = 0;
-
     while (target->get_time() < end) {
         solver.Update(estimated_step_size);
         if (exe_num >= current_recheck_step_num && total_check_num > 0) {
@@ -82,13 +78,7 @@ void StepScheduler(FixedStepSolver &solver, long double end,
             timestamp = chrono::steady_clock::now();
         }
         ++exe_num;
-
-        ++global_exe_num;
-
     }
-    cout << *target << "\n";
-
-    cout << "global_exe_num: " << global_exe_num;
 }
 
 EulerImproved::EulerImproved(System *target) : FixedStepSolver(target) {}
