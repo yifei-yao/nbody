@@ -21,11 +21,15 @@ public:
               long double, long double, long double,
               long double, long double, long double);
 
+    void AddTime(long double);
+
     std::string get_name() const;
 
     long double get_time() const;
 
     std::string Output() const;
+
+    const std::vector<Body *> &get_objects();
 
 private:
     std::string name;

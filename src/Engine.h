@@ -13,7 +13,7 @@ public:
 
     ~Engine();
 
-    void AddTarget(const std::string & = std::string(), long double = 0);
+    void AddTarget(const std::string &, long double = 0);
 
     bool
     AddObject(const std::string &, long double,
@@ -25,6 +25,13 @@ public:
     bool Save(const std::string &);
 
     bool Load(const std::string &);
+
+    bool Run(long double end, long double time_limit,
+             const std::string &method = std::string(),
+             const std::string &log_path = std::string(),
+             bool verbose = false);
+
+
 
 private:
     System *target;

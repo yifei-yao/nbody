@@ -4,9 +4,10 @@
 #ifndef BODY_H
 #define BODY_H
 
-#include "Triplet.h"
+#include "Vector.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 class Body {
     friend std::ostream &operator<<(std::ostream &, const Body &);
@@ -18,11 +19,28 @@ public:
 
     std::string Output() const;
 
+    const Vector &get_position() const;
+
+    const Vector &get_velocity() const;
+
+    void add_position(const Vector &);
+
+    void add_velocity(const Vector &);
+
+    long double get_GM() const;
+
+    void AddBuffer(const Vector &);
+
+    const Vector &get_buffer(int) const;
+
+    void ClearBuffer();
+
 private:
     std::string name;
     long double GM; //Gravitational parameter (gravitational constant * mass)
-    Triplet position;
-    Triplet velocity;
+    Vector position;
+    Vector velocity;
+    std::vector<Vector> buffer;
 };
 
 

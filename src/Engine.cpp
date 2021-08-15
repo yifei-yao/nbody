@@ -3,6 +3,7 @@
 //
 
 #include "Engine.h"
+#include "Solver.h"
 #include <iostream>
 #include <fstream>
 
@@ -68,4 +69,18 @@ bool Engine::Load(const string &path) {
         file.close();
         return false;
     }
+}
+
+bool Engine::Run(long double end, long double time_limit, const string &method,
+                 const string &log_path, bool verbose) {
+    if (target == nullptr) { return false; }
+    if (end <= target->get_time()) { return false; }
+
+    if (method == "Euler") {
+        Euler solver(target);
+        StepScheduler(solver, end, time_limit);
+    }
+
+//    cout << *target;
+    return true;
 }

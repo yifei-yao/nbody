@@ -1,13 +1,14 @@
 #include "Engine.h"
+#include <chrono>
+#include <iostream>
 
 int main() {
     Engine hyperdrive;
-    hyperdrive.AddTarget("The_Galaxy", 2475823);
-    hyperdrive.AddObject("Tatooine", 1.5944e+15, 4.27461e+19, -1.5801e+19,
-                         2.3397e+16, -150000, -432333, -362);
-    hyperdrive.PrintTarget();
-    hyperdrive.Save("Donuts.txt");
-    Engine betadrive;
-    betadrive.Load("Donuts.txt");
-    betadrive.PrintTarget();
+    hyperdrive.Load("demo.txt");
+    auto start = std::chrono::steady_clock::now();
+    hyperdrive.Run(31622400, 600, "Euler");
+    auto end = std::chrono::steady_clock::now();
+    std::cout << "\n";
+    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(
+            end - start).count();
 }

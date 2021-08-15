@@ -3,6 +3,7 @@
 //
 
 #include "System.h"
+#include "Vector.h"
 #include "StringTool.h"
 #include <utility>
 #include <sstream>
@@ -49,4 +50,12 @@ System::~System() {
         delete object;
     }
     objects.clear();
+}
+
+const std::vector<Body *> &System::get_objects() {
+    return objects;
+}
+
+void System::AddTime(long double step) {
+    time += step;
 }
