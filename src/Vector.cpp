@@ -46,3 +46,9 @@ Vector operator*(const Vector &lhs, long double scalar) {
 Vector operator+(const Vector &lhs, const Vector &rhs) {
     return Vector{lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z};
 }
+
+void Vector::operator*=(long double scalar) {
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+}

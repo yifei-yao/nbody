@@ -15,6 +15,8 @@ public:
 
     void operator+=(const Vector &);
 
+    void operator*=(long double scalar);
+
     long double get_x() const;
 
     long double get_y() const;

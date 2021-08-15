@@ -17,22 +17,20 @@ FixedStepSolver::FixedStepSolver(System *target) : Solver(target) {}
 void Euler::Update(long double step) {
     vector<Body *> objects = get_target()->get_objects();
     for (Body *object: objects) {
-        Vector acceleration;
+        Vector vector1;
         for (Body *object2: objects) {
             if (object2 != object) {
-                Vector distance =
+                Vector vector2 =
                         object2->get_position() -
                         object->get_position();
-                long double sum_of_squares = distance.SumOfSquares();
-                Vector acceleration_factor =
-                        distance * (object2->get_GM() /
-                                    (sum_of_squares *
-                                     sqrt(sum_of_squares)));
-                acceleration += acceleration_factor;
+                long double sum_of_squares = vector2.SumOfSquares();
+                vector2 *= (object2->get_GM() /
+                            (sum_of_squares * sqrt(sum_of_squares)));
+                vector1 += vector2;
             }
         }
-        Vector delta_v = acceleration * step;
-        object->AddBuffer(delta_v);
+        vector1 *= step;
+        object->AddBuffer(vector1);
     }
     for (Body *object: objects) {
         Vector displacement = object->get_velocity() * step;
