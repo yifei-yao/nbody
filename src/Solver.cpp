@@ -64,7 +64,11 @@ void StepScheduler(FixedStepSolver &solver, long double end,
 
     auto estimated_step_num =
             (end_time - chrono::steady_clock::now()) / estimated_step_time;
-    auto estimated_step_size = (end - target->get_time()) / estimated_step_num;
+
+    if (estimated_step_num < 0) { estimated_step_num = 1; }
+
+    auto estimated_step_size =
+            (end - target->get_time()) / estimated_step_num;
 
     int total_check_num = 100;
     auto current_recheck_step_num = estimated_step_num / total_check_num;
