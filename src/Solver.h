@@ -31,6 +31,13 @@ public:
     void Update(long double) override;
 };
 
+class EulerImproved : public FixedStepSolver {
+public:
+    explicit EulerImproved(System *);
+
+    void Update(long double) override;
+};
+
 void StepScheduler(FixedStepSolver &, long double end,
                    long double time_limit);
 

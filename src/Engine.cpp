@@ -81,6 +81,11 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
         StepScheduler(solver, end, time_limit);
     }
 
+    if (method == "EulerImproved") {
+        EulerImproved solver(target);
+        StepScheduler(solver, end, time_limit);
+    }
+
 //    cout << *target;
     return true;
 }

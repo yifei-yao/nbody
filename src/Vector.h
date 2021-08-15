@@ -10,6 +10,9 @@
 class Vector {
     friend Vector operator-(const Vector &lhs, const Vector &rhs);
 
+    friend Vector operator+(const Vector &lhs, const Vector &rhs);
+
+
     friend Vector operator*(const Vector &lhs, long double scalar);
 
 public:

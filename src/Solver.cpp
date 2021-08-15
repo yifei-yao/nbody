@@ -94,3 +94,35 @@ void StepScheduler(FixedStepSolver &solver, long double end,
 
     cout << *target;
 }
+
+EulerImproved::EulerImproved(System *target) : FixedStepSolver(target) {}
+
+void EulerImproved::Update(long double step) {
+    vector<Body *> objects = get_target()->get_objects();
+    for (Body *object: objects) {
+        Vector acceleration;
+        for (Body *object2: objects) {
+            if (object2 != object) {
+                Vector distance =
+                        object2->get_position() -
+                        object->get_position();
+                long double sum_of_squares = distance.SumOfSquares();
+                Vector acceleration_factor =
+                        distance * (object2->get_GM() /
+                                    (sum_of_squares *
+                                     sqrt(sum_of_squares)));
+                acceleration += acceleration_factor;
+            }
+        }
+        object->AddBuffer(acceleration);
+    }
+    for (Body *object: objects) {
+        Vector displacement = object->get_velocity() * step +
+                              object->get_buffer(0) * (step * step / 2);
+        object->add_position(displacement);
+        object->add_velocity(object->get_buffer(0) * step);
+        object->ClearBuffer();
+    }
+    get_target()->AddTime(step);
+
+}

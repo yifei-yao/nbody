@@ -47,3 +47,7 @@ void Vector::operator+=(const Vector &rhs) {
 Vector operator*(const Vector &lhs, long double scalar) {
     return Vector{lhs.x * scalar, lhs.y * scalar, lhs.z * scalar};
 }
+
+Vector operator+(const Vector &lhs, const Vector &rhs) {
+    return Vector{lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z};
+}
