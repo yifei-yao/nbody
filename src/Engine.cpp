@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
-
 #include "Engine.h"
 #include "Solver.h"
 #include <iostream>

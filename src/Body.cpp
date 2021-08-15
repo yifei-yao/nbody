@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
-
 #include "Body.h"
 #include "StringTool.h"
 #include <utility>

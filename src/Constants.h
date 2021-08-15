@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
-
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 

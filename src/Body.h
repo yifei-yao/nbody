@@ -1,6 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
 #ifndef BODY_H
 #define BODY_H
 
@@ -42,6 +39,5 @@ private:
     Vector velocity;
     std::vector<Vector> buffer;
 };
-
 
 #endif //BODY_H

@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
-
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
@@ -36,6 +32,5 @@ private:
     long double time;
     std::vector<Body *> objects;
 };
-
 
 #endif //SYSTEM_H

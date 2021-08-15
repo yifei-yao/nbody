@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
-
 #include "Vector.h"
 #include "StringTool.h"
 #include <sstream>
@@ -36,7 +32,6 @@ Vector operator-(const Vector &lhs, const Vector &rhs) {
 long double Vector::SumOfSquares() const {
     return x * x + y * y + z * z;
 }
-
 
 void Vector::operator+=(const Vector &rhs) {
     x += rhs.x;

@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/15/21.
-//
-
 #ifndef SOLVER_H
 #define SOLVER_H
 
@@ -40,6 +36,5 @@ public:
 
 void StepScheduler(FixedStepSolver &, long double end,
                    long double time_limit);
-
 
 #endif //SOLVER_H

@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
-
 #ifndef VECTOR_H
 #define VECTOR_H
 
@@ -12,15 +8,12 @@ class Vector {
 
     friend Vector operator+(const Vector &lhs, const Vector &rhs);
 
-
     friend Vector operator*(const Vector &lhs, long double scalar);
 
 public:
     explicit Vector(long double x = 0, long double y = 0, long double z = 0);
 
-
     void operator+=(const Vector &);
-
 
     long double get_x() const;
 
@@ -37,6 +30,5 @@ private:
     long double y;
     long double z;
 };
-
 
 #endif //VECTOR_H

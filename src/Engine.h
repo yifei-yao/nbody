@@ -1,7 +1,3 @@
-//
-// Created by Yifei Yao on 8/14/21.
-//
-
 #ifndef ENGINE_H
 #define ENGINE_H
 
@@ -31,11 +27,8 @@ public:
              const std::string &log_path = std::string(),
              bool verbose = false);
 
-
-
 private:
     System *target;
 };
-
 
 #endif //ENGINE_H
