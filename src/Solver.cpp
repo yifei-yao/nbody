@@ -24,8 +24,8 @@ void Euler::Update(long double step) {
                         object2->get_position() -
                         object->get_position();
                 long double sum_of_squares = vector2.SumOfSquares();
-                vector2 *= (object2->get_GM() /
-                            (sum_of_squares * sqrt(sum_of_squares)));
+                vector2 *= object2->get_GM() /
+                           (sum_of_squares * sqrt(sum_of_squares));
                 vector1 += vector2;
             }
         }
@@ -96,21 +96,18 @@ EulerImproved::EulerImproved(System *target) : FixedStepSolver(target) {}
 void EulerImproved::Update(long double step) {
     vector<Body *> objects = get_target()->get_objects();
     for (Body *object: objects) {
-        Vector acceleration;
+        Vector vector1;
         for (Body *object2: objects) {
             if (object2 != object) {
-                Vector distance =
-                        object2->get_position() -
-                        object->get_position();
-                long double sum_of_squares = distance.SumOfSquares();
-                Vector acceleration_factor =
-                        distance * (object2->get_GM() /
-                                    (sum_of_squares *
-                                     sqrt(sum_of_squares)));
-                acceleration += acceleration_factor;
+                Vector vector2 =
+                        object2->get_position() - object->get_position();
+                long double sum_of_squares = vector2.SumOfSquares();
+                vector2 *= object2->get_GM() /
+                           (sum_of_squares * sqrt(sum_of_squares));
+                vector1 += vector2;
             }
         }
-        object->AddBuffer(acceleration);
+        object->AddBuffer(vector1);
     }
     for (Body *object: objects) {
         Vector displacement = object->get_velocity() * step +
