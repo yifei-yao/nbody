@@ -108,10 +108,14 @@ void EulerImproved::Update(long double step) {
         object->AddBuffer(vector1);
     }
     for (Body *object: objects) {
-        Vector displacement = object->get_velocity() * step +
-                              object->get_buffer(0) * (step * step / 2);
+        Vector displacement = object->get_velocity();
+        displacement *= step;
+        Vector factor2 = object->get_buffer(0);
+        factor2 *= step;
+        object->add_velocity(factor2);
+        factor2 *= step / 2;
+        displacement += factor2;
         object->add_position(displacement);
-        object->add_velocity(object->get_buffer(0) * step);
         object->ClearBuffer();
     }
     get_target()->AddTime(step);
