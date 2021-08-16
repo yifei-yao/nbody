@@ -60,9 +60,7 @@ void StepScheduler(FixedStepSolver &solver, long double end,
     auto current_recheck_step_num = estimated_step_num / total_check_num;
     --total_check_num;
     size_t exe_num = 0;
-
-    size_t total_exe_num = 0;
-
+//    size_t total_exe_num = 0;
     auto timestamp = chrono::steady_clock::now();
     while (target->get_time() < end) {
         solver.Update(estimated_step_size);
@@ -81,12 +79,9 @@ void StepScheduler(FixedStepSolver &solver, long double end,
             timestamp = chrono::steady_clock::now();
         }
         ++exe_num;
-
-        ++total_exe_num;
-
+//        ++total_exe_num;
     }
-
-    cout << "total_exe_num " << total_exe_num << "\n";
+//    cout << "total_exe_num " << total_exe_num << "\n";
 }
 
 EulerImproved::EulerImproved(System *target) : FixedStepSolver(target) {}
@@ -141,17 +136,13 @@ void RK4::Update(long double step) {
         vector1 *= step / 2;
         vector1 += object->get_velocity();
         object->AddBuffer(vector1);  // v2 at index 1
-        Vector vector3 =
-                object->get_position() + object->get_velocity() * (step / 2);
-////        Questionable Improvements
-//        Vector vector3 = object->get_velocity();
-//        vector3 *= step / 2;
-//        vector3 += object->get_position();
+        Vector vector3 = object->get_velocity();
+        vector3 *= step / 2;
+        vector3 += object->get_position();
         object->AddBuffer(vector3);  // x for a2 at index 2
-        Vector vector4 = object->get_position() + vector1 * (step / 2);
-//        vector1 *= step / 2;
-//        vector1 += object->get_position();
-        object->AddBuffer(vector4); // x for a3 at index 3
+        vector1 *= step / 2;
+        vector1 += object->get_position();
+        object->AddBuffer(vector1); // x for a3 at index 3
     }
     for (Body *object: objects) {
         Vector vector1;
