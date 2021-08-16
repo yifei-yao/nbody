@@ -129,9 +129,8 @@ void RK4::Update(long double step) {
         Vector vector1;
         for (Body *object2: objects) {
             if (object2 != object) {
-                Vector vector2 =
-                        object2->get_position() -
-                        object->get_position();
+                Vector vector2 = object2->get_position();
+                vector2 -= object->get_position();
                 long double sum_of_squares = vector2.SumOfSquares();
                 vector2 *= object2->get_GM() /
                            (sum_of_squares * sqrt(sum_of_squares));
@@ -144,8 +143,14 @@ void RK4::Update(long double step) {
         object->AddBuffer(vector1);  // v2 at index 1
         Vector vector3 =
                 object->get_position() + object->get_velocity() * (step / 2);
+////        Questionable Improvements
+//        Vector vector3 = object->get_velocity();
+//        vector3 *= step / 2;
+//        vector3 += object->get_position();
         object->AddBuffer(vector3);  // x for a2 at index 2
         Vector vector4 = object->get_position() + vector1 * (step / 2);
+//        vector1 *= step / 2;
+//        vector1 += object->get_position();
         object->AddBuffer(vector4); // x for a3 at index 3
     }
     for (Body *object: objects) {
@@ -153,10 +158,10 @@ void RK4::Update(long double step) {
         Vector vector2;
         for (Body *object2: objects) {
             if (object2 != object) {
-                Vector vector3 =
-                        object2->get_buffer(2) - object->get_buffer(2);
-                Vector vector4 =
-                        object2->get_buffer(3) - object->get_buffer(3);
+                Vector vector3 = object2->get_buffer(2);
+                vector3 -= object->get_buffer(2);
+                Vector vector4 = object2->get_buffer(3);
+                vector4 -= object->get_buffer(3);
                 long double sum_of_squares_1 = vector3.SumOfSquares();
                 long double sum_of_squares_2 = vector4.SumOfSquares();
                 vector3 *= object2->get_GM() /
@@ -183,9 +188,8 @@ void RK4::Update(long double step) {
         Vector vector1; // a4
         for (Body *object2: objects) {
             if (object2 != object) {
-                Vector vector2 =
-                        object2->get_buffer(8) -
-                        object->get_buffer(8);
+                Vector vector2 = object2->get_buffer(8);
+                vector2 -= object->get_buffer(8);
                 long double sum_of_squares = vector2.SumOfSquares();
                 vector2 *= object2->get_GM() /
                            (sum_of_squares * sqrt(sum_of_squares));
