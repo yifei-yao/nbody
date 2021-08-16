@@ -97,8 +97,8 @@ void EulerImproved::Update(long double step) {
         Vector vector1;
         for (Body *object2: objects) {
             if (object2 != object) {
-                Vector vector2 =
-                        object2->get_position() - object->get_position();
+                Vector vector2 = object2->get_position();
+                vector2 -= object->get_position();
                 long double sum_of_squares = vector2.SumOfSquares();
                 vector2 *= object2->get_GM() /
                            (sum_of_squares * sqrt(sum_of_squares));
