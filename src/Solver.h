@@ -34,6 +34,13 @@ public:
     void Update(long double) override;
 };
 
+class RK4 : public FixedStepSolver {
+public:
+    explicit RK4(System *);
+
+    void Update(long double) override;
+};
+
 void StepScheduler(FixedStepSolver &, long double end, long double time_limit);
 
 #endif //SOLVER_H

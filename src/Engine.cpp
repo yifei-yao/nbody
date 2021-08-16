@@ -79,6 +79,10 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
         EulerImproved solver(target);
         StepScheduler(solver, end, time_limit);
     }
+    if (method == "RK4") {
+        RK4 solver(target);
+        StepScheduler(solver, end, time_limit);
+    }
     cout << *target << "\n";
     return true;
 }
