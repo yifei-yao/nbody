@@ -20,9 +20,8 @@ void Euler::Update(long double step) {
         Vector vector1;
         for (Body *object2: objects) {
             if (object2 != object) {
-                Vector vector2 =
-                        object2->get_position() -
-                        object->get_position();
+                Vector vector2 = object2->get_position();
+                vector2 -= object->get_position();
                 long double sum_of_squares = vector2.SumOfSquares();
                 vector2 *= object2->get_GM() /
                            (sum_of_squares * sqrt(sum_of_squares));
@@ -33,7 +32,8 @@ void Euler::Update(long double step) {
         object->AddBuffer(vector1);
     }
     for (Body *object: objects) {
-        Vector displacement = object->get_velocity() * step;
+        Vector displacement = object->get_velocity();
+        displacement *= step;
         object->add_position(displacement);
         object->add_velocity(object->get_buffer(0));
         object->ClearBuffer();
@@ -60,6 +60,9 @@ void StepScheduler(FixedStepSolver &solver, long double end,
     auto current_recheck_step_num = estimated_step_num / total_check_num;
     --total_check_num;
     size_t exe_num = 0;
+
+    size_t total_exe_num = 0;
+
     auto timestamp = chrono::steady_clock::now();
     while (target->get_time() < end) {
         solver.Update(estimated_step_size);
@@ -78,7 +81,12 @@ void StepScheduler(FixedStepSolver &solver, long double end,
             timestamp = chrono::steady_clock::now();
         }
         ++exe_num;
+
+        ++total_exe_num;
+
     }
+
+    cout << "total_exe_num " << total_exe_num << "\n";
 }
 
 EulerImproved::EulerImproved(System *target) : FixedStepSolver(target) {}
