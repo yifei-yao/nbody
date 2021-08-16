@@ -196,12 +196,18 @@ void RK4::Update(long double step) {
                 vector1 += vector2;
             }
         }
-        Vector delta_x = object->get_velocity() + object->get_buffer(1) * 2 +
-                         object->get_buffer(5) * 2 + object->get_buffer(7);
+        Vector delta_x = object->get_buffer(1);
+        delta_x += object->get_buffer(5);
+        delta_x *= 2;
+        delta_x += object->get_velocity();
+        delta_x += object->get_buffer(7);
         delta_x *= step / 6;
         object->add_position(delta_x);
-        Vector delta_v = object->get_buffer(0) + object->get_buffer(4) * 2 +
-                         object->get_buffer(6) * 2 + vector1;
+        Vector delta_v = object->get_buffer(4);
+        delta_v += object->get_buffer(6);
+        delta_v *= 2;
+        delta_v += object->get_buffer(0);
+        delta_v += vector1;
         delta_v *= step / 6;
         object->add_velocity(delta_v);
     }
