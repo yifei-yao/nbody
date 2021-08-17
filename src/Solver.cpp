@@ -227,8 +227,8 @@ void GeneralRK::Update(long double step) {
             Vector acceleration;
             for (Body *object2: objects) {
                 if (object2 != object1) {
-                    Vector factor = object2->get_buf_x_last() -
-                                    object1->get_buf_x_last();
+                    Vector factor = object2->get_buf_x_last();
+                    factor -= object1->get_buf_x_last();
                     long double sum_of_squares = factor.SumOfSquares();
                     factor *= object2->get_GM() /
                               (sum_of_squares * sqrt(sum_of_squares));
@@ -250,8 +250,8 @@ void GeneralRK::Update(long double step) {
         Vector acceleration;
         for (Body *object2: objects) {
             if (object2 != object1) {
-                Vector factor = object2->get_buf_x_last() -
-                                object1->get_buf_x_last();
+                Vector factor = object2->get_buf_x_last();
+                factor -= object1->get_buf_x_last();
                 long double sum_of_squares = factor.SumOfSquares();
                 factor *= object2->get_GM() /
                           (sum_of_squares * sqrt(sum_of_squares));
@@ -267,8 +267,10 @@ void GeneralRK::Update(long double step) {
             delta_x += object->get_buf_v(i) * b_row[i];
             delta_v += object->get_buf_a(i) * b_row[i];
         }
+        delta_x *= step;
+        delta_v *= step;
         object->add_position(delta_x);
-        object->add_position(delta_v);
+        object->add_velocity(delta_v);
         object->clear_all_buf();
     }
     get_target()->AddTime(step);
