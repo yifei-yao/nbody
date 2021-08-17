@@ -60,7 +60,9 @@ void StepScheduler(FixedStepSolver &solver, long double end,
     auto current_recheck_step_num = estimated_step_num / total_check_num;
     --total_check_num;
     size_t exe_num = 0;
-//    size_t total_exe_num = 0;
+
+    size_t total_exe_num = 0;
+
     auto timestamp = chrono::steady_clock::now();
     while (target->get_time() < end) {
         solver.Update(estimated_step_size);
@@ -79,9 +81,10 @@ void StepScheduler(FixedStepSolver &solver, long double end,
             timestamp = chrono::steady_clock::now();
         }
         ++exe_num;
-//        ++total_exe_num;
+
+        ++total_exe_num;
     }
-//    cout << "total_exe_num " << total_exe_num << "\n";
+    cout << "total_exe_num " << total_exe_num << "\n";
 }
 
 EulerImproved::EulerImproved(System *target) : FixedStepSolver(target) {}
@@ -205,3 +208,86 @@ void RK4::Update(long double step) {
     for (Body *object: objects) { object->ClearBuffer(); }
     get_target()->AddTime(step);
 }
+
+GeneralRK::GeneralRK(System *target, const vector<vector<long double>> &table,
+                     const vector<long double> &row) : FixedStepSolver(target),
+                                                       inner_table(table),
+                                                       b_row(row) {}
+
+void GeneralRK::Update(long double step) {
+    vector<vector<long double>> ref_table = inner_table;
+    ScaleTable(ref_table, step);
+    vector<Body *> objects = get_target()->get_objects();
+    for (Body *object: objects) {
+        object->push_buf_x(object->get_position());
+        object->push_buf_v(object->get_velocity());
+    }
+    for (auto &i : ref_table) {
+        for (Body *object1: objects) {
+            Vector acceleration;
+            for (Body *object2: objects) {
+                if (object2 != object1) {
+                    Vector factor = object2->get_buf_x_last() -
+                                    object1->get_buf_x_last();
+                    long double sum_of_squares = factor.SumOfSquares();
+                    factor *= object2->get_GM() /
+                              (sum_of_squares * sqrt(sum_of_squares));
+                    acceleration += factor;
+                }
+            }
+            object1->push_buf_a(acceleration);
+            Vector velocity = object1->get_buf_v(0);
+            Vector position = object1->get_buf_x(0);
+            for (size_t j = 0; j < i.size(); ++j) {
+                velocity += object1->get_buf_a(j) * i[j];
+                position += object1->get_buf_v(j) * i[j];
+            }
+            object1->push_buf_v(velocity);
+            object1->push_buf_x(position);
+        }
+    }
+    for (Body *object1: objects) {
+        Vector acceleration;
+        for (Body *object2: objects) {
+            if (object2 != object1) {
+                Vector factor = object2->get_buf_x_last() -
+                                object1->get_buf_x_last();
+                long double sum_of_squares = factor.SumOfSquares();
+                factor *= object2->get_GM() /
+                          (sum_of_squares * sqrt(sum_of_squares));
+                acceleration += factor;
+            }
+        }
+        object1->push_buf_a(acceleration);
+    }
+    for (Body *object: objects) {
+        Vector delta_x;
+        Vector delta_v;
+        for (size_t i = 0; i < b_row.size(); ++i) {
+            delta_x += object->get_buf_v(i) * b_row[i];
+            delta_v += object->get_buf_a(i) * b_row[i];
+        }
+        object->add_position(delta_x);
+        object->add_position(delta_v);
+        object->clear_all_buf();
+    }
+    get_target()->AddTime(step);
+}
+
+void
+GeneralRK::ScaleTable(vector<vector<long double>> &table, long double scalar) {
+    for (vector<long double> &vec: table) {
+        for (long double &num: vec) {
+            num *= scalar;
+        }
+    }
+}
+
+
+RK4Example::RK4Example(System *target) : GeneralRK(target, {{0.5},
+                                                            {0, 0.5},
+                                                            {0, 0, 1}},
+                                                   {
+                                                           1.0 / 6, 1.0 / 3,
+                                                           1.0 / 3, 1.0 / 6
+                                                   }) {}

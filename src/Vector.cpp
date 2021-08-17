@@ -58,3 +58,9 @@ void Vector::operator-=(const Vector &rhs) {
     y -= rhs.y;
     z -= rhs.z;
 }
+
+void Vector::operator/=(long double scalar) {
+    x /= scalar;
+    y /= scalar;
+    z /= scalar;
+}

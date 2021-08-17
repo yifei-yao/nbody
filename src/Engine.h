@@ -23,11 +23,21 @@ public:
     bool Load(const std::string &);
 
     bool Run(long double end, long double time_limit,
-             const std::string &method = std::string(),
+             const std::string &method,
              const std::string &log_path = std::string(),
              bool verbose = false);
 
+    bool
+    Translate(const std::string &from, long double = 0, long double = 0,
+              long double = 0, long double = 0, long double = 0,
+              long double= 0);
+
 private:
+    void DoTranslation(const Vector &, const Vector &, const Vector &,
+                       const Vector &);
+
+    void CalculateBarycenter(Vector &, Vector &);
+
     System *target;
 };
 

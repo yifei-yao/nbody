@@ -62,3 +62,49 @@ const Vector &Body::get_buffer(int index) const {
 void Body::ClearBuffer() {
     buffer.clear();
 }
+
+const std::string &Body::get_name() const {
+    return name;
+}
+
+void Body::push_buf_x(const Vector &vec) {
+    buf_x.push_back(vec);
+}
+
+void Body::push_buf_v(const Vector &vec) {
+    buf_v.push_back(vec);
+}
+
+void Body::push_buf_a(const Vector &vec) {
+    buf_a.push_back(vec);
+}
+
+const Vector &Body::get_buf_x(size_t index) const {
+    return buf_x[index];
+}
+
+const Vector &Body::get_buf_v(size_t index) const {
+    return buf_v[index];
+}
+
+const Vector &Body::get_buf_a(size_t index) const {
+    return buf_a[index];
+}
+
+void Body::clear_all_buf() {
+    buf_x.clear();
+    buf_v.clear();
+    buf_a.clear();
+}
+
+const Vector &Body::get_buf_x_last() const {
+    return buf_x.back();
+}
+
+const Vector &Body::get_buf_v_last() const {
+    return buf_v.back();
+}
+
+const Vector &Body::get_buf_a_last() const {
+    return buf_a.back();
+}

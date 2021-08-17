@@ -41,6 +41,27 @@ public:
     void Update(long double) override;
 };
 
+class GeneralRK : public FixedStepSolver {
+public:
+    explicit GeneralRK(System *, const std::vector<std::vector<long double>> &,
+                       const std::vector<long double> &);
+
+    void Update(long double) override;
+
+private:
+    static void ScaleTable(std::vector<std::vector<long double>> &table,
+                           long double scalar);
+
+    std::vector<std::vector<long double>> inner_table;
+    std::vector<long double> b_row;
+};
+
+
+class RK4Example : public GeneralRK {
+public:
+    explicit RK4Example(System *);
+};
+
 void StepScheduler(FixedStepSolver &, long double end, long double time_limit);
 
 #endif //SOLVER_H
