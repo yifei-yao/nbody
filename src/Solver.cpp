@@ -219,8 +219,8 @@ void GeneralRK::Update(long double step) {
     ScaleTable(ref_table, step);
     vector<Body *> objects = get_target()->get_objects();
     for (Body *object: objects) {
-        object->push_buf_x(object->get_position());
-        object->push_buf_v(object->get_velocity());
+        object->AddBuffer(object->get_velocity());
+        object->AddBuffer(object->get_position());
     }
     for (auto &row : ref_table) {
         for (Body *object1: objects) {
@@ -235,15 +235,15 @@ void GeneralRK::Update(long double step) {
                     acceleration += factor;
                 }
             }
-            object1->push_buf_a(acceleration);
-            Vector velocity = object1->get_buf_v(0);
-            Vector position = object1->get_buf_x(0);
-            for (size_t i = 0; i < row.size(); ++i) {
+            object1->AddBuffer(acceleration);
+            Vector velocity = object1->get_velocity();
+            Vector position = object1->get_position();
+            for (int i = 0; i < row.size(); ++i) {
                 velocity += object1->get_buf_a(i) * row[i];
                 position += object1->get_buf_v(i) * row[i];
             }
-            object1->push_buf_v(velocity);
-            object1->push_buf_x(position);
+            object1->AddBuffer(velocity);
+            object1->AddBuffer(position);
         }
     }
     for (Body *object1: objects) {
@@ -258,20 +258,20 @@ void GeneralRK::Update(long double step) {
                 acceleration += factor;
             }
         }
-        object1->push_buf_a(acceleration);
+        object1->AddBuffer(acceleration);
     }
     for (Body *object: objects) {
         Vector delta_x;
         Vector delta_v;
-        for (size_t i = 0; i < b_row.size(); ++i) {
-            delta_x += object->get_buf_v(i) * b_row[i];
+        for (int i = 0; i < b_row.size(); ++i) {
             delta_v += object->get_buf_a(i) * b_row[i];
+            delta_x += object->get_buf_v(i) * b_row[i];
         }
         delta_x *= step;
         delta_v *= step;
         object->add_position(delta_x);
         object->add_velocity(delta_v);
-        object->clear_all_buf();
+        object->ClearBuffer();
     }
     get_target()->AddTime(step);
 }
