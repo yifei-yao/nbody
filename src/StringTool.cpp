@@ -12,4 +12,10 @@ namespace string_tool {
         ss << number;
         return ss.str();
     }
+
+    string PercentageOut(long double number) {
+        stringstream ss, ss2;
+        ss << number * 100;
+        return ss.str().substr(0, 4);
+    }
 }

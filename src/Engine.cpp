@@ -1,7 +1,9 @@
 #include "Engine.h"
 #include "Solver.h"
+#include "StringTool.h"
 #include <iostream>
 #include <fstream>
+#include <thread>
 
 using namespace std;
 
@@ -71,21 +73,21 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
                  const string &log_path, bool verbose) {
     if (target == nullptr) { return false; }
     if (end <= target->get_time()) { return false; }
+    thread progressbar_thread(&Engine::PrintProgressBar, this, end);
     if (method == "Euler") {
         Euler solver(target);
         StepScheduler(solver, end, time_limit);
     } else if (method == "EulerImproved") {
         EulerImproved solver(target);
         StepScheduler(solver, end, time_limit);
-    } else if (method == "RK4") {
-        RK4 solver(target);
-        StepScheduler(solver, end, time_limit);
     } else if (method == "Ralston4") {
         Ralston4 solver(target);
         StepScheduler(solver, end, time_limit);
     } else {
-        return false;
+        RK4 solver(target);
+        StepScheduler(solver, end, time_limit);
     }
+    progressbar_thread.join();
     cout << *target << "\n";
     return true;
 }
@@ -147,5 +149,25 @@ void Engine::CalculateBarycenter(Vector &position, Vector &velocity) {
     if (total_GM != 0) {
         position /= total_GM;
         velocity /= total_GM;
+    }
+}
+
+void Engine::PrintProgressBar(long double end) const {
+    long double total = end - target->get_time();
+    long double start = target->get_time();
+    while (end > target->get_time()) {
+        cout << "[";
+        long double portion = (target->get_time() - start) / total;
+        int progress = portion * 60;
+        for (int i = 0; i < progress; ++i) {
+            cout << "=";
+        }
+        cout << ">";
+        for (int i = 0; i < 60 - progress; ++i) {
+            cout << " ";
+        }
+        cout << "]  " << string_tool::PercentageOut(portion) << " % \r";
+        cout.flush();
+        this_thread::sleep_for(chrono::milliseconds(200));
     }
 }

@@ -38,6 +38,8 @@ private:
 
     void CalculateBarycenter(Vector &, Vector &);
 
+    void PrintProgressBar(long double end) const;
+
     System *target;
 };
 

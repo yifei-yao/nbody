@@ -5,6 +5,8 @@
 
 namespace string_tool {
     std::string PreciseOut(long double);
+
+    std::string PercentageOut(long double);
 }
 
 #endif //STRINGTOOL_H
