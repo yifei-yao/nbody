@@ -1,6 +1,3 @@
-//
-// Created by Yifei Yao on 8/19/21.
-//
 #include "Solver.h"
 #include <vector>
 #include <cmath>

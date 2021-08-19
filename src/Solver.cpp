@@ -1,7 +1,5 @@
 #include "Solver.h"
 #include "Vector.h"
-#include <vector>
-#include <cmath>
 #include <chrono>
 
 using namespace std;
