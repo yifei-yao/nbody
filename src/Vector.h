@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include "ostream"
+#include <ostream>
 
 class Vector {
     friend Vector operator-(const Vector &lhs, const Vector &rhs);

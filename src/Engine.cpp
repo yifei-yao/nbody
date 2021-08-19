@@ -1,5 +1,5 @@
 #include "Engine.h"
-#include "solvers/Solver.h"
+#include "Solver.h"
 #include <iostream>
 #include <fstream>
 

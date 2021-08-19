@@ -1,7 +1,7 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
-#include "../System.h"
+#include "System.h"
 
 class Solver {
 public:
