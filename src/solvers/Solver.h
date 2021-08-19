@@ -1,7 +1,7 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
-#include "System.h"
+#include "../System.h"
 
 class Solver {
 public:
@@ -9,41 +9,36 @@ public:
 
     System *get_target() const;
 
+    virtual void Update(long double step) = 0;
+
 private:
     System *target;
 };
 
-class FixedStepSolver : public Solver {
-public:
-    explicit FixedStepSolver(System *);
-
-    virtual void Update(long double step) = 0;
-};
-
-class Euler : public FixedStepSolver {
+class Euler : public Solver {
 public:
     explicit Euler(System *);
 
     void Update(long double) override;
 };
 
-class EulerImproved : public FixedStepSolver {
+class EulerImproved : public Solver {
 public:
     explicit EulerImproved(System *);
 
     void Update(long double) override;
 };
 
-class RK4 : public FixedStepSolver {
+class RK4 : public Solver {
 public:
     explicit RK4(System *);
 
     void Update(long double) override;
 };
 
-class GeneralRK : public FixedStepSolver {
+class RKGeneral : public Solver {
 public:
-    explicit GeneralRK(System *, const std::vector<std::vector<long double>> &,
+    explicit RKGeneral(System *, const std::vector<std::vector<long double>> &,
                        const std::vector<long double> &);
 
     void Update(long double) override;
@@ -56,17 +51,11 @@ private:
     std::vector<long double> b_row;
 };
 
-
-class RK4Example : public GeneralRK {
-public:
-    explicit RK4Example(System *);
-};
-
-class Ralston4 : public GeneralRK {
+class Ralston4 : public RKGeneral {
 public:
     explicit Ralston4(System *);
 };
 
-void StepScheduler(FixedStepSolver &, long double end, long double time_limit);
+void StepScheduler(Solver &, long double end, long double time_limit);
 
 #endif //SOLVER_H

@@ -1,5 +1,5 @@
 #include "Engine.h"
-#include "Solver.h"
+#include "solvers/Solver.h"
 #include <iostream>
 #include <fstream>
 
@@ -74,22 +74,17 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
     if (method == "Euler") {
         Euler solver(target);
         StepScheduler(solver, end, time_limit);
-    }
-    if (method == "EulerImproved") {
+    } else if (method == "EulerImproved") {
         EulerImproved solver(target);
         StepScheduler(solver, end, time_limit);
-    }
-    if (method == "RK4") {
+    } else if (method == "RK4") {
         RK4 solver(target);
         StepScheduler(solver, end, time_limit);
-    }
-    if (method == "RK4Example") {
-        RK4Example solver(target);
-        StepScheduler(solver, end, time_limit);
-    }
-    if (method == "Ralston4") {
+    } else if (method == "Ralston4") {
         Ralston4 solver(target);
         StepScheduler(solver, end, time_limit);
+    } else {
+        return false;
     }
     cout << *target << "\n";
     return true;
@@ -115,19 +110,23 @@ Engine::Translate(const string &from, long double X, long double Y,
     }
     if (from == "Barycenter") {
         CalculateBarycenter(from_position, from_velocity);
-        DoTranslation(from_position, from_velocity, to_position, to_velocity);
+        DoTranslation(from_position, from_velocity, to_position,
+                      to_velocity);
         return true;
     }
     if (from == "Origin") {
-        DoTranslation(from_position, from_velocity, to_position, to_velocity);
+        DoTranslation(from_position, from_velocity, to_position,
+                      to_velocity);
         return true;
     }
     return false;
 }
 
 void
-Engine::DoTranslation(const Vector &from_position, const Vector &from_velocity,
-                      const Vector &to_position, const Vector &to_velocity) {
+Engine::DoTranslation(const Vector &from_position,
+                      const Vector &from_velocity,
+                      const Vector &to_position,
+                      const Vector &to_velocity) {
     Vector delta_x = to_position - from_position;
     Vector delta_v = to_velocity - from_velocity;
     for (Body *object: target->get_objects()) {
