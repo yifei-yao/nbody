@@ -62,6 +62,11 @@ public:
     explicit RK4Example(System *);
 };
 
+class Ralston4 : public GeneralRK {
+public:
+    explicit Ralston4(System *);
+};
+
 void StepScheduler(FixedStepSolver &, long double end, long double time_limit);
 
 #endif //SOLVER_H

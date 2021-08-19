@@ -222,7 +222,7 @@ void GeneralRK::Update(long double step) {
         object->push_buf_x(object->get_position());
         object->push_buf_v(object->get_velocity());
     }
-    for (auto &i : ref_table) {
+    for (auto &row : ref_table) {
         for (Body *object1: objects) {
             Vector acceleration;
             for (Body *object2: objects) {
@@ -238,9 +238,9 @@ void GeneralRK::Update(long double step) {
             object1->push_buf_a(acceleration);
             Vector velocity = object1->get_buf_v(0);
             Vector position = object1->get_buf_x(0);
-            for (size_t j = 0; j < i.size(); ++j) {
-                velocity += object1->get_buf_a(j) * i[j];
-                position += object1->get_buf_v(j) * i[j];
+            for (size_t i = 0; i < row.size(); ++i) {
+                velocity += object1->get_buf_a(i) * row[i];
+                position += object1->get_buf_v(i) * row[i];
             }
             object1->push_buf_v(velocity);
             object1->push_buf_x(position);
@@ -293,3 +293,11 @@ RK4Example::RK4Example(System *target) : GeneralRK(target, {{0.5},
                                                            1.0 / 6, 1.0 / 3,
                                                            1.0 / 3, 1.0 / 6
                                                    }) {}
+
+Ralston4::Ralston4(System *target) : GeneralRK(target,
+                                               {{0.4},
+                                                {0.29697761, 0.15875964},
+                                                {0.21810040, -3.05096516, 3.83286476}
+                                               },
+                                               {0.17476028, -0.55148066,
+                                                1.20553560, 0.17118478}) {}
