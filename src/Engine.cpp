@@ -73,6 +73,7 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
                  const string &log_path, bool verbose) {
     if (target == nullptr) { return false; }
     if (end <= target->get_time()) { return false; }
+    if (time_limit <= 0) { return false; }
     fstream file;
     file.open(log_path, ios::app);
     bool log_flag(file);
@@ -103,8 +104,6 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
     output_thread.join();
     if (log_flag) {
         log_thread.join();
-        file << target->Output();
-        file.close();
     }
     cout << target->TableString() << "\n";
     return true;

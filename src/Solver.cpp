@@ -29,7 +29,7 @@ void StepScheduler(Solver &solver, long double end,
     --total_check_num;
     size_t exe_num = 0;
 
-    size_t total_exe_num = 0;
+//    size_t total_exe_num = 0;
 
     auto timestamp = chrono::steady_clock::now();
     while (target->get_time() < end) {
@@ -50,8 +50,8 @@ void StepScheduler(Solver &solver, long double end,
         }
         ++exe_num;
 
-        ++total_exe_num;
+//        ++total_exe_num;
     }
-    cout << "total_exe_num " << total_exe_num << "\n";
+//    cout << "total_exe_num " << total_exe_num << "\n";
 }
 
