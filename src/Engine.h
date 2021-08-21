@@ -18,7 +18,7 @@ public:
 
     bool PrintTarget() const;
 
-    bool Save(const std::string &);
+    bool Save(const std::string &) const;
 
     bool Load(const std::string &);
 
@@ -39,6 +39,10 @@ private:
     void CalculateBarycenter(Vector &, Vector &);
 
     void PrintProgressBar(long double end) const;
+
+    void RealtimePrint(long double end) const;
+
+    void Log(long double end, const std::string &) const;
 
     System *target;
 };

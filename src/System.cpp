@@ -16,14 +16,6 @@ void System::AddObject(const std::string &object_name, long double GM,
 
 }
 
-std::ostream &operator<<(ostream &os, const System &aSystem) {
-    os << aSystem.name << " T = " << aSystem.time;
-    for (Body *object:aSystem.objects) {
-        os << "\n" << *object;
-    }
-    return os;
-}
-
 std::string System::get_name() const {
     return name;
 }
@@ -54,4 +46,23 @@ const std::vector<Body *> &System::get_objects() {
 
 void System::AddTime(long double step) {
     time += step;
+}
+
+string System::TableString() const {
+    stringstream ss;
+    ss << "(" << name << ", T = " << time;
+    if (objects.empty()) {
+        ss << ", empty)";
+        return ss.str();
+    } else {
+        ss << ")\n";
+    }
+    ss
+            << "BODY         |           GM |            X |            Y |            Z |           VX |           VY |           VZ\n";
+    ss
+            << "-------------+--------------+--------------+--------------+--------------+--------------+--------------+-------------";
+    for (Body *object:objects) {
+        ss << "\n" << object->TableString();
+    }
+    return ss.str();
 }

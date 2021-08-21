@@ -28,11 +28,11 @@ bool Engine::PrintTarget() const {
         cout << "Target is empty!\n";
         return false;
     }
-    cout << *target << "\n";
+    cout << target->TableString() << "\n";
     return true;
 }
 
-bool Engine::Save(const string &path) {
+bool Engine::Save(const string &path) const {
     if (target == nullptr) { return false; }
     fstream file;
     file.open(path, ios::out);
@@ -73,7 +73,20 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
                  const string &log_path, bool verbose) {
     if (target == nullptr) { return false; }
     if (end <= target->get_time()) { return false; }
-    thread progressbar_thread(&Engine::PrintProgressBar, this, end);
+    fstream file;
+    file.open(log_path, ios::app);
+    bool log_flag(file);
+    file.close();
+    thread log_thread;
+    if (log_flag) {
+        log_thread = thread(&Engine::Log, this, end, log_path);
+    }
+    thread output_thread;
+    if (verbose) {
+        output_thread = thread(&Engine::RealtimePrint, this, end);
+    } else {
+        output_thread = thread(&Engine::PrintProgressBar, this, end);
+    }
     if (method == "Euler") {
         Euler solver(target);
         StepScheduler(solver, end, time_limit);
@@ -87,8 +100,13 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
         RK4 solver(target);
         StepScheduler(solver, end, time_limit);
     }
-    progressbar_thread.join();
-    cout << *target << "\n";
+    output_thread.join();
+    if (log_flag) {
+        log_thread.join();
+        file << target->Output();
+        file.close();
+    }
+    cout << target->TableString() << "\n";
     return true;
 }
 
@@ -170,4 +188,29 @@ void Engine::PrintProgressBar(long double end) const {
         cout.flush();
         this_thread::sleep_for(chrono::milliseconds(200));
     }
+}
+
+void Engine::RealtimePrint(long double end) const {
+    while (end > target->get_time()) {
+        cout << target->TableString() << endl;
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+}
+
+void Engine::Log(long double end, const string &path) const {
+    while (end > target->get_time()) {
+        fstream file;
+        file.open(path, ios::app);
+        if (file) {
+            file << target->Output() << "\n\n";
+        }
+        file.close();
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    fstream file;
+    file.open(path, ios::app);
+    if (file) {
+        file << target->Output();
+    }
+    file.close();
 }

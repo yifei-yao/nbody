@@ -8,14 +8,16 @@
 
 
 class Body {
-    friend std::ostream &operator<<(std::ostream &, const Body &);
-
 public:
     Body(std::string name, long double,
          long double, long double, long double,
          long double, long double, long double);
 
     std::string Output() const;
+
+    std::string TableString() const;
+
+    std::string SingleString() const;
 
     const Vector &get_position() const;
 

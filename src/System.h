@@ -5,7 +5,6 @@
 #include <vector>
 
 class System {
-    friend std::ostream &operator<<(std::ostream &, const System &);
 
 public:
     explicit System(std::string name, long double time);
@@ -22,6 +21,8 @@ public:
     std::string get_name() const;
 
     long double get_time() const;
+
+    std::string TableString() const;
 
     std::string Output() const;
 

@@ -2,6 +2,7 @@
 #include "StringTool.h"
 #include <utility>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -12,17 +13,6 @@ Body::Body(std::string name, long double GM,
         GM(GM),
         position(X, Y, Z),
         velocity(VX, VY, VZ) {}
-
-ostream &operator<<(ostream &os, const Body &object) {
-    os << object.name << " GM = " << object.GM;
-    os << " X = " << object.position.get_x();
-    os << " Y = " << object.position.get_y();
-    os << " Z = " << object.position.get_z();
-    os << " VX = " << object.velocity.get_x();
-    os << " VY = " << object.velocity.get_y();
-    os << " VZ = " << object.velocity.get_z();
-    return os;
-}
 
 string Body::Output() const {
     stringstream ss;
@@ -78,4 +68,29 @@ const Vector &Body::get_buf_a(size_t index) const {
 const Vector &Body::get_buf_x_last() const {
     size_t n = buffer.size();
     return buffer[(n - 1) / 3 * 3 + 1];
+}
+
+std::string Body::TableString() const {
+    stringstream ss;
+    ss << setw(12) << left << name.substr(0, 12);
+    ss << " | " << setw(12) << right << GM;
+    ss << " | " << setw(12) << right << position.get_x();
+    ss << " | " << setw(12) << right << position.get_y();
+    ss << " | " << setw(12) << right << position.get_z();
+    ss << " | " << setw(12) << right << velocity.get_x();
+    ss << " | " << setw(12) << right << velocity.get_y();
+    ss << " | " << setw(12) << right << velocity.get_z();
+    return ss.str();
+}
+
+std::string Body::SingleString() const {
+    stringstream ss;
+    ss << name << " GM = " << GM;
+    ss << " X = " << position.get_x();
+    ss << " Y = " << position.get_y();
+    ss << " Z = " << position.get_z();
+    ss << " VX = " << velocity.get_x();
+    ss << " VY = " << velocity.get_y();
+    ss << " VZ = " << velocity.get_z();
+    return ss.str();
 }
