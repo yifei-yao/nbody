@@ -20,7 +20,7 @@ body2_name | gravitational_parameter(GM) | x_position | y_position | z_position 
 
 body3_name | gravitational_parameter(GM) | x_position | y_position | z_position | x_velocity | y_velocity | z_velocity
 
-## 1 Minute Ephemeris Simulation Results
+## 1 Minute Ephemeris Test
 Simulation is run on solar ephemeris data starting 2020-01-01 till 2021-01-1 in 60 seconds on intel i9-9980HK processor.
 
 Ephemeris data from https://ssd.jpl.nasa.gov. Also in [demo](./demo.txt). Target Body: Earth. Coordinatese Origin: Solar System Barycenter. Units: KM-S. Time: 2021-Jan-01 00:00:00.
