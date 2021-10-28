@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <matplot/matplot.h>
 
 int main() {
     Engine hyperdrive;
