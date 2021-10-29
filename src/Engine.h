@@ -23,7 +23,7 @@ public:
     bool Load(const std::string &);
 
     bool Run(long double end, long double time_limit,
-             const std::string &method,
+             const std::string &method, bool plot,
              const std::string &log_path = std::string(),
              bool verbose = false);
 
@@ -33,6 +33,10 @@ public:
               long double= 0);
 
 private:
+    void Plot(long double end) const;
+
+    void UpdatePositions(std::vector<std::vector<long double>> &positions) const;
+
     void DoTranslation(const Vector &, const Vector &, const Vector &,
                        const Vector &);
 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
+#include <matplot/matplot.h>
 
 using namespace std;
 
@@ -70,7 +71,7 @@ bool Engine::Load(const string &path) {
 }
 
 bool Engine::Run(long double end, long double time_limit, const string &method,
-                 const string &log_path, bool verbose) {
+                 bool plot, const string &log_path, bool verbose) {
     if (target == nullptr) { return false; }
     if (end <= target->get_time()) { return false; }
     if (time_limit <= 0) { return false; }
@@ -81,6 +82,10 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
     thread log_thread;
     if (log_flag) {
         log_thread = thread(&Engine::Log, this, end, log_path);
+    }
+    thread plot_thread;
+    if (plot) {
+        plot_thread = thread(&Engine::Plot, this, end);
     }
     thread output_thread;
     if (verbose) {
@@ -104,6 +109,9 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
     output_thread.join();
     if (log_flag) {
         log_thread.join();
+    }
+    if (plot) {
+        plot_thread.join();
     }
     cout << target->TableString() << "\n";
     return true;
@@ -212,4 +220,33 @@ void Engine::Log(long double end, const string &path) const {
         file << target->Output();
     }
     file.close();
+}
+
+void Engine::Plot(long double end) const {
+    using namespace matplot;
+    vector<vector<long double>> positions(3);
+    UpdatePositions(positions);
+    auto f = figure(true);
+    f->quiet_mode();
+    view(40, 35);
+    auto ax = gca();
+    auto sc = ax->scatter3(positions[0], positions[1], positions[2], "filled");
+    while (end > target->get_time()) {
+        UpdatePositions(positions);
+        ax->scatter3(positions[0], positions[1], positions[2], "filled");
+        f->draw();
+        this_thread::sleep_for(chrono::milliseconds (200));
+    }
+}
+
+void Engine::UpdatePositions(vector<vector<long double>> &positions) const {
+    positions[0].clear();
+    positions[1].clear();
+    positions[2].clear();
+    for (Body *object: target->get_objects()) {
+        Vector position = object->get_position();
+        positions[0].push_back(position.get_x());
+        positions[1].push_back(position.get_y());
+        positions[2].push_back(position.get_z());
+    }
 }
