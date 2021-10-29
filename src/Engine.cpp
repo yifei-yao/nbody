@@ -228,7 +228,6 @@ void Engine::Plot(long double end) const {
     UpdatePositions(positions);
     auto f = figure(true);
     f->quiet_mode();
-    view(40, 35);
     auto ax = gca();
     auto sc = ax->scatter3(positions[0], positions[1], positions[2], "filled");
     while (end > target->get_time()) {

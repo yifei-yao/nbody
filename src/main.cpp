@@ -3,6 +3,6 @@
 int main() {
     Engine hyperdrive;
     hyperdrive.Load("demo.txt");
-    hyperdrive.Run(31622400, 30, "RK4", true, "log.txt", false);
+    hyperdrive.Run(31622400, 10, "RK4", true, "log.txt", false);
     hyperdrive.Save("result.txt");
 }
