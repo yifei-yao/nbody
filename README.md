@@ -59,8 +59,6 @@ Based on the test, the RK4 method seems to be most accurate and is the recommand
 
 * Add dynamic step solver
 
-* Render siumation in real time
-
 * Add unit conversions
 
 ## References
