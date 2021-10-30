@@ -11,9 +11,15 @@ Go to the project directory
     cmake ..
 
     make
+
+
 To run
 
     ./nbody
+
+### Dependency
+Gnuplot is required at run time for plotting.
+
 
 ## Features
 * Supports a number of intergreation methods, including the Fourth Order-Runge Kutta Method (RK4), classic Euler, Ralston's fourth-order, and a generalized explicit RK solver with any butcher tableau
@@ -22,7 +28,7 @@ To run
 
 * Multithreading is used to display verbose info or progress bar and to save log data during simulation
 
-* 3D plotting is supported via matplotlib (python3 required)
+* Live 3D plotting is supported via matplotplusplus.
 
 ## File format
 
