@@ -1,6 +1,20 @@
 # nbody
 Experimental newtonian gravity N-body simulation program.
 
+## Build
+Go to the project directory
+
+    mkdir nbody-build
+
+    cd nbody-build
+
+    cmake ..
+
+    make
+To run
+
+    ./nbody
+
 ## Features
 * Supports a number of intergreation methods, including the Fourth Order-Runge Kutta Method (RK4), classic Euler, Ralston's fourth-order, and a generalized explicit RK solver with any butcher tableau
 
