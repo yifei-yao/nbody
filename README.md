@@ -1,7 +1,21 @@
 # nbody
 Experimental newtonian gravity N-body simulation program.
+* Supports a number of intergreation methods, including the Fourth Order-Runge Kutta Method (RK4), classic Euler, Ralston's fourth-order, and a generalized explicit RK solver with any butcher tableau
 
-## Build
+* Step size is calculated automatically and dynamically based on time limit and machine performance
+
+* Multithreading is used to display verbose info or progress bar and to save log data during simulation
+
+* Live 3D plotting is supported via matplotplusplus.
+
+
+## Usage
+### Prerequisites
+* C++ compiler that supports C++17
+* CMake 3.14+
+* Matplot++ (Embed in CMakeLists with automatic download)
+* Gnuplot 5.2.6+ (Required at runtime)
+### Build
 Go to the project directory
 
     mkdir nbody-build
@@ -12,23 +26,9 @@ Go to the project directory
 
     make
 
-
 To run
 
     ./nbody
-
-### Dependency
-Gnuplot is required at run time for plotting.
-
-
-## Features
-* Supports a number of intergreation methods, including the Fourth Order-Runge Kutta Method (RK4), classic Euler, Ralston's fourth-order, and a generalized explicit RK solver with any butcher tableau
-
-* Step size is calculated automatically and dynamically based on time limit and machine performance
-
-* Multithreading is used to display verbose info or progress bar and to save log data during simulation
-
-* Live 3D plotting is supported via matplotplusplus.
 
 ## File format
 
