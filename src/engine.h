@@ -18,10 +18,12 @@ public:
 
     bool Load(const std::string &);
 
-    bool Run(long double end, long double time_limit,
-             const std::string &method, bool plot,
+    void Run(long double end, long double time_limit,
+             const std::string &method, bool plot, bool log_flag,
              const std::string &log_path = std::string(),
              bool verbose = false);
+
+    [[nodiscard]] long double GetTargetTime() const;
 
 private:
     void Plot(long double end) const;

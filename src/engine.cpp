@@ -35,7 +35,10 @@ Engine::~Engine() {
 bool Engine::Load(const string &path) {
     fstream file;
     file.open(path, ios::in);
-    if (!file) { return false; }
+    if (!file) {
+        cout << "Unable to open file " << path << " .\n";
+        return false;
+    }
     string name;
     long double time;
     if (file >> name >> time) {
@@ -51,19 +54,14 @@ bool Engine::Load(const string &path) {
         return true;
     } else {
         file.close();
+        cout << "File incorrectly formatted.\n";
         return false;
     }
 }
 
-bool Engine::Run(long double end, long double time_limit, const string &method,
-                 bool plot, const string &log_path, bool verbose) {
-    if (target == nullptr) { return false; }
-    if (end <= target->get_time()) { return false; }
-    if (time_limit <= 0) { return false; }
-    fstream file;
-    file.open(log_path, ios::app);
-    bool log_flag(file);
-    file.close();
+void Engine::Run(long double end, long double time_limit, const string &method,
+                 bool plot, bool log_flag, const string &log_path,
+                 bool verbose) {
     thread log_thread;
     if (log_flag) {
         log_thread = thread(&Engine::Log, this, end, log_path);
@@ -78,13 +76,13 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
     } else {
         output_thread = thread(&Engine::PrintProgressBar, this, end);
     }
-    if (method == "Euler") {
+    if (method == "euler") {
         Euler solver(target);
         StepScheduler(solver, end, time_limit);
-    } else if (method == "EulerImproved") {
+    } else if (method == "euler_improved") {
         EulerImproved solver(target);
         StepScheduler(solver, end, time_limit);
-    } else if (method == "Ralston4") {
+    } else if (method == "ralston4") {
         Ralston4 solver(target);
         StepScheduler(solver, end, time_limit);
     } else {
@@ -99,7 +97,6 @@ bool Engine::Run(long double end, long double time_limit, const string &method,
         plot_thread.join();
     }
     cout << target->TableString() << "\n";
-    return true;
 }
 
 void Engine::PrintProgressBar(long double end) const {
@@ -159,7 +156,7 @@ void Engine::Plot(long double end) const {
         UpdatePositions(positions);
         ax->scatter3(positions[0], positions[1], positions[2], "filled");
         f->draw();
-        this_thread::sleep_for(chrono::milliseconds (200));
+        this_thread::sleep_for(chrono::milliseconds(200));
     }
 }
 
@@ -173,4 +170,11 @@ void Engine::UpdatePositions(vector<vector<long double>> &positions) const {
         positions[1].push_back(position.get_y());
         positions[2].push_back(position.get_z());
     }
+}
+
+long double Engine::GetTargetTime() const {
+    if (target) {
+        return target->get_time();
+    }
+    return 0;
 }
