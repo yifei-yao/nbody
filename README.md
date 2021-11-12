@@ -6,11 +6,11 @@ Experimental newtonian gravity N-body simulation program.
 
 * Multithreading is used to display verbose info or progress bar and to save log data during simulation
 
-* Live 3D plotting is supported via matplotplusplus.
+* Live 3D plotting is supported via [matplotplusplus](https://github.com/alandefreitas/matplotplusplus).
 
 
 ## Prerequisites
-* C++ compiler that supports C++17
+* C++17
 * CMake 3.14+
 * Matplot++ (Embed in CMakeLists with automatic download)
 * [Gnuplot 5.2.6+](https://riptutorial.com/gnuplot/example/11275/installation-or-setup) (Required at runtime)
@@ -32,18 +32,24 @@ Options:
 
     -h, --help:
         Show usage message
+        
     -r, --run "filename end_time time_limit":
         filename: containing input data in format specified below
         end_time: the timestamp to terminate simulation, must be greater than the staring time from the input file
         time_limit: to finish the simulation in <time_limit> seconds
+        
     -p, --plot:
         Live plot the simulation
+        
     -v, --verbose:
         Display verbose data per second
+        
     -s, --save filename:
         Save simulation result to file
+        
     -l, --log filename:
         Save per second data to file
+        
     -m, --method method_name:
         Select a method to run: rk4, euler, euler_improved, ralston4
 
@@ -51,7 +57,7 @@ Example:
 
     ./nbody -r "../demo.txt 31622400 20" -p -v
 
-## File format (See [demo](./demo.txt))
+## File format (see [demo](./demo.txt))
 
     system_name  system_time
 
