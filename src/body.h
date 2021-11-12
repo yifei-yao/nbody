@@ -1,7 +1,7 @@
 #ifndef BODY_H
 #define BODY_H
 
-#include "Vector.h"
+#include "triplet.h"
 #include <string>
 #include <iostream>
 #include <vector>

@@ -1,4 +1,4 @@
-#include "Solver.h"
+#include "solver.h"
 #include <chrono>
 
 using namespace std;

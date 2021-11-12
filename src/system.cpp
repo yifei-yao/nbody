@@ -1,6 +1,6 @@
-#include "System.h"
-#include "Vector.h"
-#include "StringTool.h"
+#include "system.h"
+#include "triplet.h"
+#include "string_tool.h"
 #include <utility>
 #include <sstream>
 

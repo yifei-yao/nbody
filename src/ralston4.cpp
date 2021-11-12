@@ -1,4 +1,4 @@
-#include "Solver.h"
+#include "solver.h"
 
 Ralston4::Ralston4(System *target) : RKGeneral(target,
                                                {{0.4},

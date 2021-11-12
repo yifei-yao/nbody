@@ -1,6 +1,6 @@
-#include "Engine.h"
-#include "Solver.h"
-#include "StringTool.h"
+#include "engine.h"
+#include "solver.h"
+#include "string_tool.h"
 #include <iostream>
 #include <thread>
 #include <matplot/matplot.h>

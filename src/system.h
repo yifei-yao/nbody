@@ -1,7 +1,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "Body.h"
+#include "body.h"
 #include <vector>
 
 class System {

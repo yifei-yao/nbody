@@ -1,5 +1,5 @@
-#include "Vector.h"
-#include "StringTool.h"
+#include "triplet.h"
+#include "string_tool.h"
 #include <sstream>
 
 using namespace string_tool;
