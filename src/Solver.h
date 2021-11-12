@@ -7,7 +7,7 @@ class Solver {
 public:
     explicit Solver(System *);
 
-    System *get_target() const;
+    [[nodiscard]] System *get_target() const;
 
     virtual void Update(long double step) = 0;
 

@@ -13,35 +13,35 @@ public:
          long double, long double, long double,
          long double, long double, long double);
 
-    std::string Output() const;
+    [[nodiscard]] std::string Output() const;
 
-    std::string TableString() const;
+    [[nodiscard]] std::string TableString() const;
 
-    std::string SingleString() const;
+    [[nodiscard]] std::string SingleString() const;
 
-    const Vector &get_position() const;
+    [[nodiscard]] const Vector &get_position() const;
 
-    const Vector &get_velocity() const;
+    [[nodiscard]] const Vector &get_velocity() const;
 
-    const std::string &get_name() const;
+    [[nodiscard]] const std::string &get_name() const;
 
     void add_position(const Vector &);
 
     void add_velocity(const Vector &);
 
-    long double get_GM() const;
+    [[nodiscard]] long double get_GM() const;
 
     void AddBuffer(const Vector &);
 
-    const Vector &get_buffer(int) const;
+    [[nodiscard]] const Vector &get_buffer(int) const;
 
     void ClearBuffer();
 
-    const Vector &get_buf_x_last() const;
+    [[nodiscard]] const Vector &get_buf_x_last() const;
 
-    const Vector &get_buf_v(size_t) const;
+    [[nodiscard]] const Vector &get_buf_v(size_t) const;
 
-    const Vector &get_buf_a(size_t) const;
+    [[nodiscard]] const Vector &get_buf_a(size_t) const;
 
 private:
     std::string name;

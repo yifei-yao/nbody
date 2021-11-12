@@ -21,15 +21,15 @@ public:
 
     void operator/=(long double scalar);
 
-    long double get_x() const;
+    [[nodiscard]] long double get_x() const;
 
-    long double get_y() const;
+    [[nodiscard]] long double get_y() const;
 
-    long double get_z() const;
+    [[nodiscard]] long double get_z() const;
 
-    std::string Output() const;
+    [[nodiscard]] std::string Output() const;
 
-    long double SumOfSquares() const;
+    [[nodiscard]] long double SumOfSquares() const;
 
 private:
     long double x;

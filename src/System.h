@@ -18,13 +18,13 @@ public:
 
     void AddTime(long double);
 
-    std::string get_name() const;
+    [[nodiscard]] std::string get_name() const;
 
-    long double get_time() const;
+    [[nodiscard]] long double get_time() const;
 
-    std::string TableString() const;
+    [[nodiscard]] std::string TableString() const;
 
-    std::string Output() const;
+    [[nodiscard]] std::string Output() const;
 
     const std::vector<Body *> &get_objects();
 
