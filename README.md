@@ -12,7 +12,6 @@ Experimental newtonian gravity N-body simulation program.
 ## Prerequisites
 * C++17
 * CMake 3.14+
-* Matplot++ (Embed in CMakeLists with automatic download)
 * [Gnuplot 5.2.6+](https://riptutorial.com/gnuplot/example/11275/installation-or-setup) (Required at runtime)
 ## Build
 Go to the project directory
@@ -86,7 +85,7 @@ Based on the test, the RK4 method seems to be most accurate and is the recommand
 
 ## To-dos
 
-* Better 3D animations
+* Better 3D animation
 * Support unit conversions
 
 ## References
