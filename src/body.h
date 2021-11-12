@@ -17,13 +17,9 @@ public:
 
     [[nodiscard]] std::string TableString() const;
 
-    [[nodiscard]] std::string SingleString() const;
-
     [[nodiscard]] const Vector &get_position() const;
 
     [[nodiscard]] const Vector &get_velocity() const;
-
-    [[nodiscard]] const std::string &get_name() const;
 
     void add_position(const Vector &);
 

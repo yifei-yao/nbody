@@ -16,10 +16,6 @@ void System::AddObject(const std::string &object_name, long double GM,
 
 }
 
-std::string System::get_name() const {
-    return name;
-}
-
 long double System::get_time() const {
     return time;
 }

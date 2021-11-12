@@ -53,10 +53,6 @@ void Body::ClearBuffer() {
     buffer.clear();
 }
 
-const std::string &Body::get_name() const {
-    return name;
-}
-
 const Vector &Body::get_buf_v(size_t index) const {
     return buffer[3 * index];
 }
@@ -83,14 +79,3 @@ std::string Body::TableString() const {
     return ss.str();
 }
 
-std::string Body::SingleString() const {
-    stringstream ss;
-    ss << name << " GM = " << GM;
-    ss << " X = " << position.get_x();
-    ss << " Y = " << position.get_y();
-    ss << " Z = " << position.get_z();
-    ss << " VX = " << velocity.get_x();
-    ss << " VY = " << velocity.get_y();
-    ss << " VZ = " << velocity.get_z();
-    return ss.str();
-}

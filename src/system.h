@@ -18,8 +18,6 @@ public:
 
     void AddTime(long double);
 
-    [[nodiscard]] std::string get_name() const;
-
     [[nodiscard]] long double get_time() const;
 
     [[nodiscard]] std::string TableString() const;
