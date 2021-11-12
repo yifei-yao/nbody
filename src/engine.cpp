@@ -105,7 +105,7 @@ void Engine::PrintProgressBar(long double end) const {
     while (end > target->get_time()) {
         cout << "[";
         long double portion = (target->get_time() - start) / total;
-        int progress = portion * 60;
+        int progress = int(portion * 60);
         for (int i = 0; i < progress; ++i) {
             cout << "=";
         }
