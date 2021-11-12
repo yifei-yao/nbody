@@ -110,7 +110,20 @@ int main(int argc, char **argv) {
 }
 
 void Usage() {
-    cout << "this is Usage info\n";
+    cout
+            << "Usage:\nnbody { -h | -r \"filename1 end_time time_limit\" [-p] [-v] [-s filename2] [-l filename3] [-m method_name] }\n";
+    cout << "Options:\n";
+    cout << "-h, --help:\n\tShow usage message\n";
+    cout << "-r, --run \"filename end_time time_limit\":\n";
+    cout << "\tfilename: containing input data\n";
+    cout << "\tend_time: the timestamp to terminate simulation\n";
+    cout << "\ttime_limit: to finish the simulation in <time_limit> seconds\n";
+    cout << "-p, --plot:\n\tLive plot the simulation\n";
+    cout << "-v, --verbose:\n\tDisplay verbose data per second\n";
+    cout << "-s, --save filename:\n\tSave simulation result to file\n";
+    cout << "-l, --log filename:\n\tSave per second data to file\n";
+    cout
+            << "-m, --method method_name:\n\tSelect a method to run: rk4, euler, euler_improved, ralston4\n";
 }
 
 void UsageHint() {
