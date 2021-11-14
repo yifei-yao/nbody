@@ -1,6 +1,6 @@
 # nbody
 Experimental newtonian gravity N-body simulation program.
-* Supports a number of intergreation methods, including the Fourth Order-Runge Kutta Method (RK4), classic Euler, Ralston's fourth-order, and a generalized explicit RK solver with any butcher tableau
+* Supports a number of integration methods, including the Fourth Order-Runge Kutta Method (RK4), classic Euler, Ralston's fourth-order, and a generalized explicit RK solver with any butcher tableau
 
 * Step size is calculated automatically and dynamically based on time limit and machine performance
 
@@ -69,9 +69,9 @@ Example:
     ...
 
 ## 1 Minute Ephemeris Test
-Simulation is run on solar ephemeris data from 2020-01-01 to 2021-01-1 in 60 seconds on intel i9-9980HK processor.
+Simulation is run on solar ephemeris data from 2020-01-01 to 2021-01-1 in 60 seconds on intel i9-9980HK at 2.4 GHz.
 
-Ephemeris data from https://ssd.jpl.nasa.gov. Also in [demo](./demo.txt). Target Body: Earth. Coordinatese Origin: Solar System Barycenter. Units: KM-S. Time: 2021-Jan-01 00:00:00.
+Ephemeris data from https://ssd.jpl.nasa.gov. Also in [demo](./demo.txt). Target Body: Earth. Coordinate Origin: Solar System Barycenter. Units: KM-S. Time: 2021-Jan-01 00:00:00.
 
 | Method | X | Y | Z | VX | VY | VZ |
 | ------ | - | - | - | -- | -- | -- |
@@ -81,7 +81,7 @@ Ephemeris data from https://ssd.jpl.nasa.gov. Also in [demo](./demo.txt). Target
 | Euler Improved               | -27787189.57566320 | 145532564.1920737 | 8832.729469206849 | -29.77710945764749 | -5.541868574965185 | -0.000130693943158 |
 | Ralston4                     | -27857364.17170360 | 145505715.2585099 | 8846.985279501034 | -29.77423945488506 | -5.562197916939682 | -0.000548913841268 |
 
-Based on the test, the RK4 method seems to be most accurate and is the recommanded method.
+Based on the test, the RK4 method seems to be most accurate and is the recommended method.
 
 ## To-dos
 
