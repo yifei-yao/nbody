@@ -15,67 +15,67 @@ Body::Body(std::string name, long double GM,
         velocity(VX, VY, VZ) {}
 
 string Body::Output() const {
-    stringstream ss;
-    ss << name << " " << string_tool::PreciseOut(GM) << " " << position.Output()
-       << " " << velocity.Output();
-    return ss.str();
+  stringstream ss;
+  ss << name << " " << string_tool::PreciseOut(GM) << " " << position.Output()
+     << " " << velocity.Output();
+  return ss.str();
 }
 
-const Vector &Body::get_position() const {
-    return position;
+const Triplet &Body::get_position() const {
+  return position;
 }
 
-const Vector &Body::get_velocity() const {
-    return velocity;
+const Triplet &Body::get_velocity() const {
+  return velocity;
 }
 
 long double Body::get_GM() const {
-    return GM;
+  return GM;
 }
 
-void Body::AddBuffer(const Vector &vector) {
-    buffer.push_back(vector);
+void Body::AddBuffer(const Triplet &triplet) {
+  buffer.push_back(triplet);
 }
 
-void Body::add_position(const Vector &vector) {
-    position += vector;
+void Body::add_position(const Triplet &triplet) {
+  position += triplet;
 }
 
-void Body::add_velocity(const Vector &vector) {
-    velocity += vector;
+void Body::add_velocity(const Triplet &triplet) {
+  velocity += triplet;
 }
 
-const Vector &Body::get_buffer(int index) const {
-    return buffer[index];
+const Triplet &Body::get_buffer(int index) const {
+  return buffer[index];
 }
 
 void Body::ClearBuffer() {
-    buffer.clear();
+  buffer.clear();
 }
 
-const Vector &Body::get_buf_v(size_t index) const {
-    return buffer[3 * index];
+const Triplet &Body::get_buf_v(size_t index) const {
+  return buffer[3 * index];
 }
 
-const Vector &Body::get_buf_a(size_t index) const {
-    return buffer[3 * index + 2];
+const Triplet &Body::get_buf_a(size_t index) const {
+  return buffer[3 * index + 2];
 }
 
-const Vector &Body::get_buf_x_last() const {
-    size_t n = buffer.size();
-    return buffer[(n - 1) / 3 * 3 + 1];
+const Triplet &Body::get_buf_x_last() const {
+  size_t n = buffer.size();
+  return buffer[(n - 1) / 3 * 3 + 1];
 }
 
 std::string Body::TableString() const {
-    stringstream ss;
-    ss << setw(12) << left << name.substr(0, 12);
-    ss << " | " << setw(12) << right << GM;
-    ss << " | " << setw(12) << right << position.get_x();
-    ss << " | " << setw(12) << right << position.get_y();
-    ss << " | " << setw(12) << right << position.get_z();
-    ss << " | " << setw(12) << right << velocity.get_x();
-    ss << " | " << setw(12) << right << velocity.get_y();
-    ss << " | " << setw(12) << right << velocity.get_z();
-    return ss.str();
+  stringstream ss;
+  ss << setw(12) << left << name.substr(0, 12);
+  ss << " | " << setw(12) << right << GM;
+  ss << " | " << setw(12) << right << position.get_x();
+  ss << " | " << setw(12) << right << position.get_y();
+  ss << " | " << setw(12) << right << position.get_z();
+  ss << " | " << setw(12) << right << velocity.get_x();
+  ss << " | " << setw(12) << right << velocity.get_y();
+  ss << " | " << setw(12) << right << velocity.get_z();
+  return ss.str();
 }
 

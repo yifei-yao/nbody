@@ -1,40 +1,40 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef TRIPLET_H
+#define TRIPLET_H
 
 #include <ostream>
 
-class Vector {
-    friend Vector operator-(const Vector &lhs, const Vector &rhs);
+class Triplet {
+  friend Triplet operator-(const Triplet &lhs, const Triplet &rhs);
 
-    friend Vector operator+(const Vector &lhs, const Vector &rhs);
+  friend Triplet operator+(const Triplet &lhs, const Triplet &rhs);
 
-    friend Vector operator*(const Vector &lhs, long double scalar);
+  friend Triplet operator*(const Triplet &lhs, long double scalar);
 
 public:
-    explicit Vector(long double x = 0, long double y = 0, long double z = 0);
+  explicit Triplet(long double x = 0, long double y = 0, long double z = 0);
 
-    void operator+=(const Vector &);
+  void operator+=(const Triplet &);
 
-    void operator-=(const Vector &);
+  void operator-=(const Triplet &);
 
-    void operator*=(long double scalar);
+  void operator*=(long double scalar);
 
-    void operator/=(long double scalar);
+  void operator/=(long double scalar);
 
-    [[nodiscard]] long double get_x() const;
+  [[nodiscard]] long double get_x() const;
 
-    [[nodiscard]] long double get_y() const;
+  [[nodiscard]] long double get_y() const;
 
-    [[nodiscard]] long double get_z() const;
+  [[nodiscard]] long double get_z() const;
 
-    [[nodiscard]] std::string Output() const;
+  [[nodiscard]] std::string Output() const;
 
-    [[nodiscard]] long double SumOfSquares() const;
+  [[nodiscard]] long double SumOfSquares() const;
 
 private:
-    long double x;
-    long double y;
-    long double z;
+  long double x;
+  long double y;
+  long double z;
 };
 
-#endif //VECTOR_H
+#endif //TRIPLET_H

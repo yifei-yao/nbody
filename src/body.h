@@ -9,43 +9,42 @@
 
 class Body {
 public:
-    Body(std::string name, long double,
-         long double, long double, long double,
-         long double, long double, long double);
+  Body(std::string name, long double,
+       long double, long double, long double,
+       long double, long double, long double);
 
-    [[nodiscard]] std::string Output() const;
+  [[nodiscard]] std::string Output() const;
 
-    [[nodiscard]] std::string TableString() const;
+  [[nodiscard]] std::string TableString() const;
 
-    [[nodiscard]] const Vector &get_position() const;
+  [[nodiscard]] const Triplet &get_position() const;
 
-    [[nodiscard]] const Vector &get_velocity() const;
+  [[nodiscard]] const Triplet &get_velocity() const;
 
-    void add_position(const Vector &);
+  void add_position(const Triplet &);
 
-    void add_velocity(const Vector &);
+  void add_velocity(const Triplet &);
 
-    [[nodiscard]] long double get_GM() const;
+  [[nodiscard]] long double get_GM() const;
 
-    void AddBuffer(const Vector &);
+  void AddBuffer(const Triplet &);
 
-    [[nodiscard]] const Vector &get_buffer(int) const;
+  [[nodiscard]] const Triplet &get_buffer(int) const;
 
-    void ClearBuffer();
+  void ClearBuffer();
 
-    [[nodiscard]] const Vector &get_buf_x_last() const;
+  [[nodiscard]] const Triplet &get_buf_x_last() const;
 
-    [[nodiscard]] const Vector &get_buf_v(size_t) const;
+  [[nodiscard]] const Triplet &get_buf_v(size_t) const;
 
-    [[nodiscard]] const Vector &get_buf_a(size_t) const;
+  [[nodiscard]] const Triplet &get_buf_a(size_t) const;
 
 private:
-    std::string name;
-
-    long double GM; //Gravitational parameter (gravitational constant * mass)
-    Vector position;
-    Vector velocity;
-    std::vector<Vector> buffer;
+  std::string name;
+  long double GM; //Gravitational parameter (gravitational constant * mass)
+  Triplet position;
+  Triplet velocity;
+  std::vector<Triplet> buffer;
 };
 
 #endif //BODY_H
