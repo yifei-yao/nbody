@@ -13,30 +13,30 @@ RKGeneral::RKGeneral(System *target, const vector<vector<long double>> &table,
 void RKGeneral::Update(long double step) {
   vector<vector<long double>> ref_table = inner_table;
   ScaleTable(ref_table, step);
-  vector<Body *> objects = get_target()->get_objects();
+  vector<Body *> objects = get_target()->GetObjects();
   for (Body *object: objects) {
-    object->AddBuffer(object->get_velocity());
-    object->AddBuffer(object->get_position());
+    object->AddBuffer(object->GetVelocity());
+    object->AddBuffer(object->GetPosition());
   }
   for (auto &row: ref_table) {
     for (Body *object1: objects) {
       Triplet acceleration;
       for (Body *object2: objects) {
         if (object2 != object1) {
-          Triplet factor = object2->get_buf_x_last();
-          factor -= object1->get_buf_x_last();
+          Triplet factor = object2->GetBufXLast();
+          factor -= object1->GetBufXLast();
           long double sum_of_squares = factor.SumOfSquares();
-          factor *= object2->get_GM() /
+          factor *= object2->GetGM() /
                     (sum_of_squares * sqrt(sum_of_squares));
           acceleration += factor;
         }
       }
       object1->AddBuffer(acceleration);
-      Triplet velocity = object1->get_velocity();
-      Triplet position = object1->get_position();
+      Triplet velocity = object1->GetVelocity();
+      Triplet position = object1->GetPosition();
       for (int i = 0; i < row.size(); ++i) {
-        velocity += object1->get_buf_a(i) * row[i];
-        position += object1->get_buf_v(i) * row[i];
+        velocity += object1->GetBufA(i) * row[i];
+        position += object1->GetBufV(i) * row[i];
       }
       object1->AddBuffer(velocity);
       object1->AddBuffer(position);
@@ -46,10 +46,10 @@ void RKGeneral::Update(long double step) {
     Triplet acceleration;
     for (Body *object2: objects) {
       if (object2 != object1) {
-        Triplet factor = object2->get_buf_x_last();
-        factor -= object1->get_buf_x_last();
+        Triplet factor = object2->GetBufXLast();
+        factor -= object1->GetBufXLast();
         long double sum_of_squares = factor.SumOfSquares();
-        factor *= object2->get_GM() /
+        factor *= object2->GetGM() /
                   (sum_of_squares * sqrt(sum_of_squares));
         acceleration += factor;
       }
@@ -60,13 +60,13 @@ void RKGeneral::Update(long double step) {
     Triplet delta_x;
     Triplet delta_v;
     for (int i = 0; i < b_row.size(); ++i) {
-      delta_v += object->get_buf_a(i) * b_row[i];
-      delta_x += object->get_buf_v(i) * b_row[i];
+      delta_v += object->GetBufA(i) * b_row[i];
+      delta_x += object->GetBufV(i) * b_row[i];
     }
     delta_x *= step;
     delta_v *= step;
-    object->add_position(delta_x);
-    object->add_velocity(delta_v);
+    object->AddPosition(delta_x);
+    object->AddVelocity(delta_v);
     object->ClearBuffer();
   }
   get_target()->AddTime(step);

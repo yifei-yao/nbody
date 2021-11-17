@@ -5,15 +5,15 @@
 using namespace std;
 
 void Euler::Update(long double step) {
-  vector<Body *> objects = get_target()->get_objects();
+  vector<Body *> objects = get_target()->GetObjects();
   for (Body *object: objects) {
     Triplet triplet1;
     for (Body *object2: objects) {
       if (object2 != object) {
-        Triplet triplet2 = object2->get_position();
-        triplet2 -= object->get_position();
+        Triplet triplet2 = object2->GetPosition();
+        triplet2 -= object->GetPosition();
         long double sum_of_squares = triplet2.SumOfSquares();
-        triplet2 *= object2->get_GM() /
+        triplet2 *= object2->GetGM() /
                     (sum_of_squares * sqrt(sum_of_squares));
         triplet1 += triplet2;
       }
@@ -22,10 +22,10 @@ void Euler::Update(long double step) {
     object->AddBuffer(triplet1);
   }
   for (Body *object: objects) {
-    Triplet displacement = object->get_velocity();
+    Triplet displacement = object->GetVelocity();
     displacement *= step;
-    object->add_position(displacement);
-    object->add_velocity(object->get_buffer(0));
+    object->AddPosition(displacement);
+    object->AddVelocity(object->GetBuffer(0));
     object->ClearBuffer();
   }
   get_target()->AddTime(step);

@@ -21,11 +21,11 @@ public:
 
   void operator/=(long double scalar);
 
-  [[nodiscard]] long double get_x() const;
+  [[nodiscard]] long double GetX() const;
 
-  [[nodiscard]] long double get_y() const;
+  [[nodiscard]] long double GetY() const;
 
-  [[nodiscard]] long double get_z() const;
+  [[nodiscard]] long double GetZ() const;
 
   [[nodiscard]] std::string Output() const;
 

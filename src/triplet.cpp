@@ -7,15 +7,15 @@ using namespace string_tool;
 Triplet::Triplet(long double x, long double y, long double z) : x(x), y(y),
                                                                 z(z) {}
 
-long double Triplet::get_x() const {
+long double Triplet::GetX() const {
   return x;
 }
 
-long double Triplet::get_y() const {
+long double Triplet::GetY() const {
   return y;
 }
 
-long double Triplet::get_z() const {
+long double Triplet::GetZ() const {
   return z;
 }
 

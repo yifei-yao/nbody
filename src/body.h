@@ -6,7 +6,6 @@
 #include <iostream>
 #include <vector>
 
-
 class Body {
 public:
   Body(std::string name, long double,
@@ -17,27 +16,27 @@ public:
 
   [[nodiscard]] std::string TableString() const;
 
-  [[nodiscard]] const Triplet &get_position() const;
+  [[nodiscard]] const Triplet &GetPosition() const;
 
-  [[nodiscard]] const Triplet &get_velocity() const;
+  [[nodiscard]] const Triplet &GetVelocity() const;
 
-  void add_position(const Triplet &);
+  void AddPosition(const Triplet &);
 
-  void add_velocity(const Triplet &);
+  void AddVelocity(const Triplet &);
 
-  [[nodiscard]] long double get_GM() const;
+  [[nodiscard]] long double GetGM() const;
 
   void AddBuffer(const Triplet &);
 
-  [[nodiscard]] const Triplet &get_buffer(int) const;
+  [[nodiscard]] const Triplet &GetBuffer(int) const;
 
   void ClearBuffer();
 
-  [[nodiscard]] const Triplet &get_buf_x_last() const;
+  [[nodiscard]] const Triplet &GetBufXLast() const;
 
-  [[nodiscard]] const Triplet &get_buf_v(size_t) const;
+  [[nodiscard]] const Triplet &GetBufV(size_t) const;
 
-  [[nodiscard]] const Triplet &get_buf_a(size_t) const;
+  [[nodiscard]] const Triplet &GetBufA(size_t) const;
 
 private:
   std::string name;

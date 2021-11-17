@@ -16,7 +16,7 @@ void System::AddObject(const std::string &object_name, long double GM,
 
 }
 
-long double System::get_time() const {
+long double System::GetTime() const {
   return time;
 }
 
@@ -36,7 +36,7 @@ System::~System() {
   objects.clear();
 }
 
-const std::vector<Body *> &System::get_objects() {
+const std::vector<Body *> &System::GetObjects() {
   return objects;
 }
 

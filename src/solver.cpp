@@ -22,7 +22,7 @@ void StepScheduler(Solver &solver, long double end,
   auto estimated_step_num =
           (end_time - chrono::steady_clock::now()) / estimated_step_time;
   if (estimated_step_num < 0) { estimated_step_num = 1; }
-  auto estimated_step_size = (end - target->get_time()) / estimated_step_num;
+  auto estimated_step_size = (end - target->GetTime()) / estimated_step_num;
   int total_check_num = 100;
   auto current_recheck_step_num = estimated_step_num / total_check_num;
   --total_check_num;
@@ -31,7 +31,7 @@ void StepScheduler(Solver &solver, long double end,
 //    size_t total_exe_num = 0;
 
   auto timestamp = chrono::steady_clock::now();
-  while (target->get_time() < end) {
+  while (target->GetTime() < end) {
     solver.Update(estimated_step_size);
     if (exe_num >= current_recheck_step_num && total_check_num > 0) {
       auto time_elapsed = chrono::steady_clock::now() - timestamp;
@@ -40,7 +40,7 @@ void StepScheduler(Solver &solver, long double end,
               (end_time - chrono::steady_clock::now()) /
               estimated_step_time;
       estimated_step_size =
-              (end - target->get_time()) / estimated_step_remained;
+              (end - target->GetTime()) / estimated_step_remained;
       current_recheck_step_num =
               estimated_step_remained / total_check_num;
       --total_check_num;

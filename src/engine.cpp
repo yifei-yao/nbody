@@ -100,11 +100,11 @@ void Engine::Run(long double end, long double time_limit, const string &method,
 }
 
 void Engine::PrintProgressBar(long double end) const {
-  long double total = end - target->get_time();
-  long double start = target->get_time();
-  while (end > target->get_time()) {
+  long double total = end - target->GetTime();
+  long double start = target->GetTime();
+  while (end > target->GetTime()) {
     cout << "[";
-    long double portion = (target->get_time() - start) / total;
+    long double portion = (target->GetTime() - start) / total;
     int progress = int(portion * 60);
     for (int i = 0; i < progress; ++i) {
       cout << "=";
@@ -120,14 +120,14 @@ void Engine::PrintProgressBar(long double end) const {
 }
 
 void Engine::RealtimePrint(long double end) const {
-  while (end > target->get_time()) {
+  while (end > target->GetTime()) {
     cout << target->TableString() << endl;
     this_thread::sleep_for(chrono::seconds(1));
   }
 }
 
 void Engine::Log(long double end, const string &path) const {
-  while (end > target->get_time()) {
+  while (end > target->GetTime()) {
     fstream file;
     file.open(path, ios::app);
     if (file) {
@@ -152,7 +152,7 @@ void Engine::Plot(long double end) const {
   f->quiet_mode();
   auto ax = gca();
   auto sc = ax->scatter3(positions[0], positions[1], positions[2], "filled");
-  while (end > target->get_time()) {
+  while (end > target->GetTime()) {
     UpdatePositions(positions);
     ax->scatter3(positions[0], positions[1], positions[2], "filled");
     f->draw();
@@ -164,17 +164,17 @@ void Engine::UpdatePositions(vector<vector<long double>> &positions) const {
   positions[0].clear();
   positions[1].clear();
   positions[2].clear();
-  for (Body *object: target->get_objects()) {
-    Triplet position = object->get_position();
-    positions[0].push_back(position.get_x());
-    positions[1].push_back(position.get_y());
-    positions[2].push_back(position.get_z());
+  for (Body *object: target->GetObjects()) {
+    Triplet position = object->GetPosition();
+    positions[0].push_back(position.GetX());
+    positions[1].push_back(position.GetY());
+    positions[2].push_back(position.GetZ());
   }
 }
 
 long double Engine::GetTargetTime() const {
   if (target) {
-    return target->get_time();
+    return target->GetTime();
   }
   return 0;
 }
