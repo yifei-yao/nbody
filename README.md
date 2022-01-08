@@ -12,7 +12,7 @@ Experimental newtonian gravity N-body simulation program.
 ## Prerequisites
 * C++17
 * CMake 3.14+
-* [Gnuplot 5.2.6+](https://riptutorial.com/gnuplot/example/11275/installation-or-setup) (Required at runtime)
+* [Gnuplot 5.2.6+](https://riptutorial.com/gnuplot/example/11275/installation-or-setup) (Required at runtime for plotting)
 ## Build
 Go to the project directory
 
@@ -20,7 +20,7 @@ Go to the project directory
 
     cd nbody-build
 
-    cmake ..
+    cmake -DCMAKE_BUILD_TYPE=Release ..
 
     make
 
